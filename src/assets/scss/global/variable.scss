@@ -1,0 +1,131 @@
+// FONT IMPORTS
+@import url('https://fonts.googleapis.com/css?family=Quicksand:300,400,500,600,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+
+
+// COLOR SYSTEM
+$blue: #304FFE;
+$red: #E53935;
+$yellow: #FFEB3B;
+$green: #43A047;
+$light-gray: #ECEFF1;
+$gray: #CFD8DC;
+$dark-gray: #546E7A;
+$dark: #263238;
+$light: #FFFFFF;
+$cyan: #00E5FF;
+$teal: #00BFA5;
+$black: #000000;
+$orange: #FB8C00;
+
+
+$color-primary:$blue;
+$color-secondary:$teal;
+$color-info: $cyan;
+$color-success: $green;
+$color-warning: $yellow;
+$color-danger: $red;
+
+
+// MEDIA QUERY
+$large-monitor-screen: 1440px;
+$monitor-screen: 1366px;
+$laptop: 1200px;
+$notebook: 1024px;
+$ipad: 900px;
+$tablet: 767px;
+$small-tablet: 640px;
+$phone-landscape: 525px;
+$large-phone: 480px;
+$medium-phone: 425px;
+$small-phone: 375px;
+$pocket-phone: 325px;
+
+// GUTTER
+$gutter-xl: 40px;
+$gutter-l: 32px;
+$gutter-m: 24px;
+$gutter-s: 16px;
+$gutter-sm: 12px;
+$gutter-xs: 8px;
+$gutter-xxs: 4px;
+$gutter-xxxs: 2px;
+
+$gutter2-xl: 50px;
+$gutter2-l: 40px;
+$gutter2-m: 30px;
+$gutter2-s: 20px;
+$gutter2-xs: 15px;
+$gutter2-xxs: 10px;
+$gutter2-xxxs: 5px;
+
+// FONT SIZE
+$font-jumbo: 64px;
+$font-hero: 52px;
+$font-xxxl: 48px;
+$font-xxl: 32px;
+$font-xl: 28px;
+$font-l: 24px;
+$font-m: 18px;
+$font-s: 16px;
+$font-xs: 14px;
+$font-xxs: 12px;
+$font-caption: 10px;
+$font-helper: 8px;
+
+
+
+// FONT
+$global-font-1: -apple-system,
+BlinkMacSystemFont,
+"Segoe UI",
+"Roboto",
+"Oxygen",
+"Ubuntu",
+"Cantarell",
+"Fira Sans",
+"Droid Sans",
+"Helvetica Neue",
+sans-serif;
+$global-font-2: 'Titillium Web',
+-apple-system,
+BlinkMacSystemFont,
+Segoe UI,
+Helvetica,
+Arial,
+sans-serif,
+Apple Color Emoji,
+Segoe UI Emoji,
+Segoe UI Symbol;
+$mono-font: source-code-pro,
+Menlo,
+Monaco,
+Consolas,
+"Courier New",
+monospace;
+$kbd-font: SFMono-Regular,
+Menlo,
+Monaco,
+Consolas,
+Liberation Mono,
+Courier New,
+monospace;
+
+$global-font-1: 'Roboto',
+sans-serif;
+
+
+// theme
+$theme-primary: $color-primary;
+$text-link: $color-primary;
+$theme-secondary: $color-secondary;
+$theme-font: $global-font-1;
+
+
+@mixin boxShadow() {
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16), 0 2px 4px rgba(0, 0, 0, 0.23);
+  -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16), 0 2px 4px rgba(0, 0, 0, 0.23);
+  -ms-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16), 0 2px 4px rgba(0, 0, 0, 0.23);
+  -o-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16), 0 2px 4px rgba(0, 0, 0, 0.23);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16), 0 2px 4px rgba(0, 0, 0, 0.23)
+}

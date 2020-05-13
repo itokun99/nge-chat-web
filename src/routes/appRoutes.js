@@ -1,17 +1,29 @@
-import { Homepage, About } from "pages";
+import { Homepage, About, Login, Register } from 'pages';
 
 const appRoutes = [
   {
-    name: "About",
+    name: 'About',
     component: About,
     exact: true,
-    path: "/about"
+    path: '/about'
   },
   {
-    name: "Homepage",
+    name: 'Register',
+    component: Register,
+    exact: true,
+    path: '/register'
+  },
+  {
+    name: 'Login',
+    component: Login,
+    exact: true,
+    path: '/login'
+  },
+  {
+    name: 'Homepage',
     component: Homepage,
     exact: true,
-    path: "/"
+    path: '/'
   }
 ];
 

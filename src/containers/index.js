@@ -1,7 +1,4 @@
+import AppContainer from './AppContainer';
 import BaseContainer from './BaseContainer';
-import ProfileContainer from './ProfileContainer';
 
-export {
-  BaseContainer,
-  ProfileContainer
-}
+export { BaseContainer, AppContainer };

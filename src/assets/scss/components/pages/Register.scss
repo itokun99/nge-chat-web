@@ -1,0 +1,33 @@
+.Register {
+  $block: Register;
+  display: flex;
+  height: 100%;
+  padding-top: 80px;
+  flex-direction: column;
+
+  &__content {
+    flex: 1;
+    width: 100%;
+    padding: 0 $gutter-m;
+  }
+
+  &__description {
+    margin-bottom: $gutter-m;
+    line-height: 1.4;
+    font-size: $font-xs;
+  }
+
+  &__divider {
+    margin: $gutter-l 0;
+    height: 2px;
+    background-color: $dark-gray;
+    opacity: 0.3;
+  }
+
+  &__bottom {
+    font-size: $font-xs;
+    text-align: center;
+    padding: 0 $gutter-m;
+    padding-bottom: $gutter-m;
+  }
+}

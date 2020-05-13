@@ -1,0 +1,46 @@
+.AppHeader {
+  height: 60px;
+  background-color: $theme-primary;
+  color: $light;
+  display: flex;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  @include boxShadow();
+
+  &__left,
+  &__right {
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__center {
+    flex: 1;
+    display: flex;
+    padding: 0 $gutter-s;
+    vertical-align: middle;
+    align-items: center;
+  }
+
+  &__title {
+    font-size: $font-m;
+  }
+
+  &--transparent {
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  &--light {
+    color: $dark
+  }
+
+  &--dark {
+    color: $light
+  }
+}
