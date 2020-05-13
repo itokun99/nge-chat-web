@@ -1,17 +1,23 @@
-import { Homepage, About } from "pages";
+import { Homepage, About, Login } from 'pages';
 
 const appRoutes = [
   {
-    name: "About",
+    name: 'About',
     component: About,
     exact: true,
-    path: "/about"
+    path: '/about'
   },
   {
-    name: "Homepage",
+    name: 'Login',
+    component: Login,
+    exact: true,
+    path: '/login'
+  },
+  {
+    name: 'Homepage',
     component: Homepage,
     exact: true,
-    path: "/"
+    path: '/'
   }
 ];
 

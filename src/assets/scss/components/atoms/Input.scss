@@ -1,0 +1,13 @@
+.Input {
+  transition: .3s;
+  width: 100%;
+  padding: $gutter-xs $gutter-xs;
+  outline: none;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+
+  &:focus {
+    border: 2px solid $theme-primary;
+    box-shadow: 0 0px 2px $theme-primary;
+  }
+}

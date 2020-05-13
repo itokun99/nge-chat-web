@@ -1,0 +1,13 @@
+.BaseContainer {
+  $block: BaseContainer;
+
+  &__body {
+    margin-top: 60px;
+  }
+
+  &--no-header {
+    .#{$block}__body {
+      margin-top: 0;
+    }
+  }
+}

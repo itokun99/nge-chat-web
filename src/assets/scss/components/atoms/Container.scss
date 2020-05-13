@@ -1,0 +1,9 @@
+.Container {
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-width: $small-phone;
+  margin: 0 auto 0 auto;
+  background-color: $light;
+  min-height: 100vh;
+}

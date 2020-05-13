@@ -1,0 +1,23 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100%;
+  font-family: $theme-font;
+  color: $dark;
+  background-color: $light-gray;
+}
+
+a {
+  color: $text-link;
+}
+
+.switch-wrapper {
+  position: relative;
+}
+
+.switch-wrapper>div {
+  width: 100%;
+  position: absolute;
+}

@@ -1,13 +1,21 @@
-import { React, Link } from "libraries";
+import { React, Link, useHistory } from 'libraries';
+import { BaseContainer } from 'containers';
+import { Button } from 'components';
 
 const Homepage = () => {
+  const history = useHistory();
+
   return (
-    <div>
-      <h1>Selamat datang di Kabayan Coding</h1>
-      <p>
-        Klik <Link to="/about">disini</Link> ke halaman tentang saya
-      </p>
-    </div>
+    <BaseContainer disableHeader>
+      <div className="Homepage">
+        <div className="Homepage__content">
+          <h1 className="Homepage__title">Nge-Chat</h1>
+          <Button onClick={() => history.push('/login')} block>
+            Login
+          </Button>
+        </div>
+      </div>
+    </BaseContainer>
   );
 };
 

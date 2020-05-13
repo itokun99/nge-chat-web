@@ -1,0 +1,39 @@
+.Button {
+  $block: Button;
+
+  display: inline-block;
+  padding: $gutter-xs $gutter-m;
+  background-color: transparent;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+
+  @mixin color ($name, $textColor, $backgroundColor) {
+    &--#{$name} {
+      border-color: $backgroundColor;
+      color: $textColor;
+      background-color: $backgroundColor;
+      @content;
+    }
+  }
+
+  @include color('primary', $light, $theme-primary);
+  @include color('danger', $light, $color-danger);
+  @include color('warning', $dark, $color-warning);
+  @include color('info', $dark, $color-info);
+  @include color('secondary', $light, $color-secondary);
+
+
+  &--block {
+    display: block;
+    width: 100%;
+  }
+
+  &--disabled {
+    opacity: 0.8;
+    cursor: not-allowed;
+    border-color: $gray;
+    background-color: $gray;
+  }
+}
