@@ -22,8 +22,11 @@ const Register = () => {
     >
       <div className="Register">
         <div className="Register__content">
-          <h1 className="Register__title">Gabung Nge-Chat</h1>
-          <div className="Register__description"></div>
+          <h1 className="Register__title">Daftar Nge-Chat</h1>
+          <div className="Register__description">
+            Gabung dan jadi bagian dari komunitas nge-chat bersama orang
+            terdekat
+          </div>
           <FormGroup>
             <Input
               value={name}

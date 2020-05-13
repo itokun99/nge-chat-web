@@ -11,6 +11,12 @@
     padding: 0 $gutter-m;
   }
 
+  &__description {
+    margin-bottom: $gutter-m;
+    line-height: 1.4;
+    font-size: $font-xs;
+  }
+
   &__divider {
     margin: $gutter-l 0;
     height: 2px;
