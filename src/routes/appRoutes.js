@@ -1,4 +1,4 @@
-import { Homepage, About, Login } from 'pages';
+import { Homepage, About, Login, Register } from 'pages';
 
 const appRoutes = [
   {
@@ -6,6 +6,12 @@ const appRoutes = [
     component: About,
     exact: true,
     path: '/about'
+  },
+  {
+    name: 'Register',
+    component: Register,
+    exact: true,
+    path: '/register'
   },
   {
     name: 'Login',

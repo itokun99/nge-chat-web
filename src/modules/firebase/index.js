@@ -20,11 +20,8 @@ class Firebase {
       const response = await firebase
         .auth()
         .signInWithEmailAndPassword(payload.email, payload.password);
-      console.log('response', response);
-      alert('Sukses');
       return response;
     } catch (err) {
-      alert(err.message);
       throw err;
     }
   };

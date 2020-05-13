@@ -4,30 +4,12 @@ import { Input, FormGroup, Button } from 'components';
 import { firebaseService } from 'modules';
 import { showPopup } from 'services';
 
-const Login = () => {
+const Register = () => {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
-  const [email, changeEmail] = useState('', { name: 'email' });
+  const [name, changeName] = useState('');
+  const [email, changeEmail] = useState('');
   const [password, changePassword] = useState('');
-
-  const submit = async () => {
-    setLoading(true);
-    try {
-      await firebaseService.login({ email, password });
-      setLoading(false);
-      showPopup({
-        title: 'Berhasil Masuk',
-        description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis lorem bibendum, pulvinar est in, blandit sem. Pellentesque vitae mi eu quam tempor luctus in a purus. Duis quis sollicitudin tortor.'
-      });
-    } catch (err) {
-      showPopup({
-        title: 'Terjadi Kesalahan!',
-        description: err.message
-      });
-      setLoading(false);
-    }
-  };
 
   return (
     <BaseContainer
@@ -38,9 +20,18 @@ const Login = () => {
         transparent: true
       }}
     >
-      <div className="Login">
-        <div className="Login__content">
-          <h1 className="Login__title">Login</h1>
+      <div className="Register">
+        <div className="Register__content">
+          <h1 className="Register__title">Gabung Nge-Chat</h1>
+          <div className="Register__description"></div>
+          <FormGroup>
+            <Input
+              value={name}
+              onChange={e => changeName(e.target.value)}
+              type="text"
+              placeholder="Nama lengkap"
+            />
+          </FormGroup>
           <FormGroup>
             <Input
               value={email}
@@ -57,18 +48,18 @@ const Login = () => {
               placeholder="Password"
             />
           </FormGroup>
-          <Button block disabled={loading} onClick={submit}>
-            Masuk
+          <Button block disabled={loading}>
+            Daftar
           </Button>
-          <div className="Login__divider"></div>
+          <div className="Register__divider"></div>
 
-          <Button color="danger" block disabled={loading} onClick={submit}>
-            Masuk dengan Google
+          <Button color="danger" block disabled={loading}>
+            Daftar dengan Google
           </Button>
         </div>
-        <div className="Login__bottom">
+        <div className="Register__bottom">
           <span>
-            Belum punya akun? daftar <Link to="/register">disini</Link>
+            Sudah Punya akun? masuk <Link to="/login">disini</Link>
           </span>
         </div>
       </div>
@@ -76,4 +67,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

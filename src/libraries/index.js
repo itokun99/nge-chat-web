@@ -36,3 +36,4 @@ export * from 'react-router-dom';
 export * from 'react-router-transition';
 export * from 'redux';
 export * from 'react-redux';
+export * from 'redux-devtools-extension';

@@ -6,6 +6,7 @@ import {
   spring,
   Redirect
 } from 'libraries';
+import { AppContainer } from 'containers';
 import { Container } from 'components';
 import { appRoutes } from 'routes';
 import { firebaseService } from 'modules';
@@ -48,7 +49,7 @@ const App = () => {
 
   return (
     <Router>
-      <Container>
+      <AppContainer>
         <AnimatedSwitch
           {...pageTransitions}
           className="switch-wrapper"
@@ -71,7 +72,7 @@ const App = () => {
             />
           ))}
         </AnimatedSwitch>
-      </Container>
+      </AppContainer>
     </Router>
   );
 };

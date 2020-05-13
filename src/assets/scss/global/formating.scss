@@ -2,11 +2,25 @@
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   height: 100%;
   font-family: $theme-font;
   color: $dark;
   background-color: $light-gray;
+}
+
+#root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  background-color: $light;
+  max-width: $small-phone;
 }
 
 a {
@@ -15,9 +29,11 @@ a {
 
 .switch-wrapper {
   position: relative;
+  height: 100%;
 }
 
 .switch-wrapper>div {
   width: 100%;
+  height: 100%;
   position: absolute;
 }
