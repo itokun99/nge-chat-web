@@ -1,29 +1,40 @@
-import { Homepage, About, Login, Register } from 'pages';
+import { Homepage, About, Login, Register, Dashboard } from 'pages';
 
 const appRoutes = [
   {
     name: 'About',
     component: About,
     exact: true,
-    path: '/about'
+    path: '/about',
+    auth: false
+  },
+  {
+    name: 'Dashboard',
+    component: Dashboard,
+    exact: true,
+    path: '/dashboard',
+    auth: true
   },
   {
     name: 'Register',
     component: Register,
     exact: true,
-    path: '/register'
+    path: '/register',
+    auth: false
   },
   {
     name: 'Login',
     component: Login,
     exact: true,
-    path: '/login'
+    path: '/login',
+    auth: false
   },
   {
     name: 'Homepage',
     component: Homepage,
     exact: true,
-    path: '/'
+    path: '/',
+    auth: false
   }
 ];
 

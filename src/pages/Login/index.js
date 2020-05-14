@@ -1,16 +1,39 @@
-import { React, Link, useHistory, useState, firebase } from 'libraries';
+import {
+  React,
+  Link,
+  useHistory,
+  PropTypes,
+  useState,
+  connect
+} from 'libraries';
 import { BaseContainer } from 'containers';
 import { Input, FormGroup, Button } from 'components';
-import { firebaseService } from 'modules';
+import { firebaseService, profileSelector } from 'modules';
 import { showPopup } from 'services';
+import { validateEmail, handleAsync } from 'utils';
 
-const Login = () => {
+const Login = ({ profile }) => {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [email, changeEmail] = useState('', { name: 'email' });
   const [password, changePassword] = useState('');
 
   const submit = async () => {
+    if (!email || !password) {
+      return showPopup({
+        title: 'Formulir tidak lengkap',
+        description:
+          'Formulir tidak diisi dengan benar! Pastikan untuk mengisi formulir login dengan benar'
+      });
+    }
+
+    if (!validateEmail(email)) {
+      return showPopup({
+        title: 'Email tidak valid',
+        description: 'Pastikan format email untuk akun anda diisi dengan benar!'
+      });
+    }
+
     setLoading(true);
     try {
       await firebaseService.login({ email, password });
@@ -29,6 +52,33 @@ const Login = () => {
     }
   };
 
+  const submitGoogle = async () => {
+    setLoading(true);
+    const [res, err] = await handleAsync(firebaseService.loginWithGoogle());
+    setLoading(false);
+    if (err) {
+      showPopup({
+        title: 'Terjadi Kesalahan!',
+        description: err.message
+      });
+      throw err;
+    }
+
+    showPopup({
+      title: 'Berhasil Masuk',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis lorem bibendum, pulvinar est in, blandit sem. Pellentesque vitae mi eu quam tempor luctus in a purus. Duis quis sollicitudin tortor.'
+    });
+
+    return res;
+  };
+
+  React.useEffect(() => {
+    if (profile) {
+      history.replace('/dashboard/');
+    }
+  }, [history, profile]);
+
   return (
     <BaseContainer
       disableRightAction
@@ -40,7 +90,7 @@ const Login = () => {
     >
       <div className="Login">
         <div className="Login__content">
-          <h1 className="Login__title">Login</h1>
+          <h1 className="Login__title">Masuk</h1>
           <FormGroup>
             <Input
               value={email}
@@ -54,7 +104,7 @@ const Login = () => {
               value={password}
               onChange={e => changePassword(e.target.value)}
               type="password"
-              placeholder="Password"
+              placeholder="Kata Sandi"
             />
           </FormGroup>
           <Button block disabled={loading} onClick={submit}>
@@ -62,7 +112,12 @@ const Login = () => {
           </Button>
           <div className="Login__divider"></div>
 
-          <Button color="danger" block disabled={loading} onClick={submit}>
+          <Button
+            color="danger"
+            block
+            disabled={loading}
+            onClick={submitGoogle}
+          >
             Masuk dengan Google
           </Button>
         </div>
@@ -76,4 +131,16 @@ const Login = () => {
   );
 };
 
-export default Login;
+Login.propTypes = {
+  profile: PropTypes.object
+};
+
+Login.defaultProps = {
+  profile: null
+};
+
+const reduxState = state => ({
+  profile: profileSelector(state)
+});
+
+export default connect(reduxState)(Login);

@@ -4,12 +4,16 @@ import {
   Route,
   AnimatedSwitch,
   spring,
-  Redirect
+  Redirect,
+  connect,
+  PropTypes,
+  useHistory
 } from 'libraries';
 import { AppContainer } from 'containers';
-import { Container } from 'components';
+import { LoadingScreen, AppRoute } from 'components';
 import { appRoutes } from 'routes';
-import { firebaseService } from 'modules';
+import { firebaseService, profileSelector } from 'modules';
+import { showPopup, getProfile } from 'services';
 
 function glide(val) {
   return spring(val, {
@@ -33,18 +37,15 @@ const pageTransitions = {
   }
 };
 
-const App = () => {
-  const [isLogin, setLogin] = React.useState(false);
+const App = ({ profile }) => {
+  const [appLoading, setAppLoading] = React.useState(true);
 
   React.useEffect(() => {
-    firebaseService.auth().onAuthStateChanged(user => {
-      console.log('user', user);
-      if (user) {
-        setLogin(true);
-      } else {
-        setLogin(false);
-      }
-    });
+    const init = async () => {
+      await getProfile();
+      setAppLoading(false);
+    };
+    init();
   }, []);
 
   return (
@@ -72,9 +73,22 @@ const App = () => {
             />
           ))}
         </AnimatedSwitch>
+        <LoadingScreen show={appLoading} />
       </AppContainer>
     </Router>
   );
 };
 
-export default App;
+const reduxState = state => ({
+  profile: profileSelector(state)
+});
+
+App.propTypes = {
+  profile: PropTypes.object
+};
+
+App.defaultProps = {
+  profile: null
+};
+
+export default connect(reduxState)(App);

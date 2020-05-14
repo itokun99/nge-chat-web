@@ -1,22 +1,22 @@
-import { moment } from "libraries";
+import { moment } from 'libraries';
 
-export const getPath = (path = "") => (path ? `/${path}` : "");
+export const getPath = (path = '') => (path ? `/${path}` : '');
 
 export const createUrlParamFromObj = (params = null) => {
-  if (!params) return "";
+  if (!params) return '';
   const result = [];
   Object.keys(params).map(key => result.push(`${key}=${params[key]}`));
-  return `?${result.join("&")}`;
+  return `?${result.join('&')}`;
 };
 
-export const getCustomUrl = (url = "") => url;
+export const getCustomUrl = (url = '') => url;
 
-export const getContentType = (type = "") => {
+export const getContentType = (type = '') => {
   switch (type) {
-    case "form-data":
-      return "multipart/form-data";
+    case 'form-data':
+      return 'multipart/form-data';
     default:
-      return "application/json";
+      return 'application/json';
   }
 };
 
@@ -36,5 +36,10 @@ export const handleAsync = async promise => {
 
 export const convertDate = date => {
   if (!date) return null;
-  return moment(date).format("DD MMMM YYYY");
+  return moment(date).format('DD MMMM YYYY');
+};
+
+export const validateEmail = email => {
+  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
 };

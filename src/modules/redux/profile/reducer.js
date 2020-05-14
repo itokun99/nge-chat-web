@@ -1,7 +1,6 @@
 import actionType from './actionType';
 
-
-const initialState = {}
+const initialState = null;
 
 const profile = (state = initialState, action) => {
   switch (action.type) {
@@ -9,10 +8,12 @@ const profile = (state = initialState, action) => {
       return {
         ...state,
         ...action.value
-      }
+      };
+    case actionType.CLEAR_PROFILE:
+      return initialState;
     default:
-      return state
+      return state;
   }
-}
+};
 
 export default profile;

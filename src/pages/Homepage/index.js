@@ -1,18 +1,17 @@
-import { React, Link, useHistory } from 'libraries';
+import { React, Link, useHistory, connect, PropTypes } from 'libraries';
 import { BaseContainer } from 'containers';
 import { Button } from 'components';
 import { showPopup } from 'services';
+import { profileSelector } from 'modules';
 
-const Homepage = () => {
+const Homepage = ({ profile }) => {
   const history = useHistory();
 
-  const handleClick = () => {
-    showPopup({
-      show: true,
-      title: 'Ini Judul',
-      description: 'Ini description'
-    });
-  };
+  React.useEffect(() => {
+    if (profile) {
+      history.replace('/dashboard/');
+    }
+  }, [history, profile]);
 
   return (
     <BaseContainer disableHeader>
@@ -29,4 +28,16 @@ const Homepage = () => {
   );
 };
 
-export default Homepage;
+Homepage.propTypes = {
+  profile: PropTypes.object
+};
+
+Homepage.defaultProps = {
+  profile: null
+};
+
+const reduxState = state => ({
+  profile: profileSelector(state)
+});
+
+export default connect(reduxState)(Homepage);
