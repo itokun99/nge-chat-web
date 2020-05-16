@@ -1,6 +1,6 @@
-import { React } from 'libraries';
+import { React, MdMenu } from 'libraries';
 import { BaseContainer, PrivateContainer } from 'containers';
-import { Button } from 'components';
+import { Button, Sidebar } from 'components';
 import { logout } from 'services';
 
 const Dashboard = () => (
@@ -9,7 +9,8 @@ const Dashboard = () => (
       disableRightAction
       headerProps={{
         theme: 'light',
-        transparent: true
+        transparent: true,
+        leftComponent: <MdMenu size={32} />
       }}
     >
       <div className="Dashboard">

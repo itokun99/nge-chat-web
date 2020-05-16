@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { React, MdArrowBack, MdClose, PropTypes, cx } from 'libraries';
 
 const AppHeader = ({
@@ -7,7 +9,9 @@ const AppHeader = ({
   disableLeftAction,
   disableRightAction,
   transparent,
-  theme
+  theme,
+  leftComponent,
+  rightComponent
 }) => {
   const appHeaderClass = cx('AppHeader', {
     [`AppHeader--transparent`]: transparent,
@@ -18,7 +22,13 @@ const AppHeader = ({
     <div className={appHeaderClass}>
       {!disableLeftAction && (
         <div className="AppHeader__left">
-          <MdArrowBack size={32} onClick={onPressLeft} />
+          {leftComponent ? (
+            <React.Fragment>
+              <span onClick={onPressLeft}>{leftComponent}</span>
+            </React.Fragment>
+          ) : (
+            <MdArrowBack size={32} onClick={onPressLeft} />
+          )}
         </div>
       )}
       <div className="AppHeader__center">
@@ -26,7 +36,13 @@ const AppHeader = ({
       </div>
       {!disableRightAction && (
         <div className="AppHeader__right">
-          <MdClose size={32} onClick={onPressRight} />
+          {rightComponent ? (
+            <React.Fragment>
+              <span onClick={onPressRight}>{rightComponent}</span>
+            </React.Fragment>
+          ) : (
+            <MdClose size={32} onClick={onPressRight} />
+          )}
         </div>
       )}
     </div>
@@ -40,6 +56,8 @@ AppHeader.propTypes = {
   onPressRight: PropTypes.func,
   title: PropTypes.string,
   transparent: PropTypes.bool,
+  leftComponent: PropTypes.any,
+  rightComponent: PropTypes.any,
   theme: PropTypes.oneOf(['dark', 'light'])
 };
 
@@ -49,6 +67,8 @@ AppHeader.defaultProps = {
   transparent: false,
   disableLeftAction: false,
   disableRightAction: false,
+  leftComponent: null,
+  rightComponent: null,
   onPressLeft: () => {},
   onPressRight: () => {}
 };

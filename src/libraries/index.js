@@ -12,7 +12,8 @@ import {
   MdClose,
   MdArrowForward,
   MdArrowUpward,
-  MdCheck
+  MdCheck,
+  MdMenu
 } from 'react-icons/md';
 
 export {
@@ -28,7 +29,8 @@ export {
   MdArrowForward,
   MdArrowUpward,
   MdCheck,
-  firebase
+  firebase,
+  MdMenu
 };
 
 export * from 'react';

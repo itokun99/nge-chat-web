@@ -78,12 +78,12 @@ const logout = async () => {
   return res;
 };
 
-const loginWithGoogle = () => {
+const loginWithGoogle = async () => {
   const provider = new firebase.auth.GoogleAuthProvider();
-  return firebase
-    .auth()
-    .signInWithPopup(provider)
-    .then(res => res);
+
+  const response = await firebase.auth().signInWithRedirect(provider);
+
+  return response;
 };
 
 export const firebaseService = {

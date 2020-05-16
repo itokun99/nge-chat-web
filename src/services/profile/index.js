@@ -1,5 +1,6 @@
 import { firebase } from 'libraries';
 import { firebaseService, store, setProfile, clearProfile } from 'modules';
+import { createProfileObj } from 'utils';
 
 const { dispatch } = store;
 
@@ -19,8 +20,7 @@ export const getProfile = () => {
             });
           }
 
-          const userObj = { ...user, ...userData };
-
+          const userObj = createProfileObj({ ...user, ...userData });
           dispatch(setProfile(userObj));
           resolve(user);
         } else {
