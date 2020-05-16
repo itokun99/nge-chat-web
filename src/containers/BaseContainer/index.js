@@ -1,5 +1,5 @@
-import { React, PropTypes, cx } from 'libraries';
-import { AppHeader } from 'components';
+import { React, PropTypes, cx, MdMenu } from 'libraries';
+import { AppHeader, Sidebar } from 'components';
 
 const BaseContainer = ({
   onPressLeft,
@@ -9,22 +9,40 @@ const BaseContainer = ({
   disableHeader,
   disableLeftAction,
   disableRightAction,
-  headerProps
+  headerProps,
+  sidebar
 }) => {
+  const [showSidebar, visibleSidebar] = React.useState(false);
+
+  const onSidebarDropClick = () => {
+    visibleSidebar(false);
+  };
+
+  const handlePressLeft = () => {
+    if (sidebar) {
+      visibleSidebar(true);
+    }
+    onPressLeft();
+  };
+
   const baseContainerClass = cx('BaseContainer', {
     [`BaseContainer--no-header`]: disableHeader
   });
 
   return (
     <div className={baseContainerClass}>
+      {sidebar && (
+        <Sidebar show={showSidebar} onDropClick={onSidebarDropClick} />
+      )}
       {!disableHeader && (
         <div className="BaseContainer__header">
           <AppHeader
             disableLeftAction={disableLeftAction}
             disableRightAction={disableRightAction}
             title={title}
-            onPressLeft={onPressLeft}
+            onPressLeft={handlePressLeft}
             onPressRight={onPressRight}
+            leftComponent={sidebar ? <MdMenu size={32} /> : null}
             {...headerProps}
           />
         </div>
@@ -42,11 +60,17 @@ BaseContainer.propTypes = {
   onPressLeft: PropTypes.func,
   onPressRight: PropTypes.func,
   disableLeftAction: PropTypes.bool,
-  disableRightAction: PropTypes.bool
+  disableRightAction: PropTypes.bool,
+  rightComponent: PropTypes.any,
+  leftComponent: PropTypes.any,
+  sidebar: PropTypes.bool
 };
 
 BaseContainer.defaultProps = {
-  disableHeader: false
+  disableHeader: false,
+  sidebar: false,
+  onPressLeft: () => {},
+  onPressRight: () => {}
 };
 
 export default BaseContainer;

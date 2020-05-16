@@ -1,0 +1,17 @@
+.ProfileSidebar {
+  padding: $gutter-m 0;
+
+  text-align: center;
+
+
+  &__photo {
+    background-color: $dark-gray;
+    margin: auto;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    background-size: contain;
+    background-position: center;
+    margin-bottom: $gutter-m
+  }
+}

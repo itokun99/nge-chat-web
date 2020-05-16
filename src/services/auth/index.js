@@ -1,5 +1,5 @@
-import { handleAsync } from 'utils';
-import { store, firebaseService, clearProfile } from 'modules';
+import { handleAsync, createProfileObj } from 'utils';
+import { store, firebaseService, clearProfile, setProfile } from 'modules';
 
 const { dispatch } = store;
 
@@ -34,7 +34,15 @@ export const register = async (payload = {}) => {
 export const login = async (payload = {}) => {
   const [res, err] = await handleAsync(firebaseService.login(payload));
 
-  if (err) throw err;
+  if (err) {
+    throw err;
+  }
+  const { user } = res;
+  const userData = await firebaseService.getUserData(user.uid);
+  const userObj = createProfileObj({ ...user, ...userData });
+
+  dispatch(setProfile(userObj));
+
   return res;
 };
 

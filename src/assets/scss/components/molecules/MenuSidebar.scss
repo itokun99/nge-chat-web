@@ -1,0 +1,34 @@
+.MenuSidebar {
+
+  &__item {
+    transition: .3s ease;
+    color: $dark-gray;
+    font-weight: 600;
+    display: flex;
+    text-decoration: none;
+    padding: 0 $gutter-sm;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    &--active {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  &__icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: $gutter-xs;
+  }
+
+  &__text {
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+}

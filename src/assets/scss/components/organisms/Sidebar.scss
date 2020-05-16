@@ -1,0 +1,37 @@
+.SidebarDrop {
+  transition: .2s ease;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  background-color: $dark;
+  z-index: -1;
+
+  &--show {
+    opacity: 0.8;
+    z-index: 1;
+  }
+}
+
+.Sidebar {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  width: 280px;
+  height: 100%;
+  overflow: auto;
+  background-color: $light;
+  transition: .2s;
+  z-index: 2;
+  opacity: 0;
+  transform: translateX(-100%);
+
+  &--show {
+    opacity: 1;
+    transform: translateX(0)
+  }
+}

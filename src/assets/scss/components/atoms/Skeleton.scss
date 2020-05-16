@@ -1,0 +1,15 @@
+@keyframes skeletonShimmer {
+  @for $i from 0 through 100 {
+    #{$i * 1%} {
+      background: linear-gradient(90deg, $light-gray 0%, $gray #{$i * 1%}, $light-gray 100%);
+    }
+  }
+}
+
+.Skeleton {
+  max-width: 100%;
+  background-color: $gray;
+  animation: skeletonShimmer 3s infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+}

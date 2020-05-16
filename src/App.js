@@ -49,28 +49,30 @@ const App = ({ profile }) => {
   return (
     <Router>
       <AppContainer>
-        <AnimatedSwitch
-          {...pageTransitions}
-          className="switch-wrapper"
-          mapStyles={styles => ({
-            opacity: styles.opacity,
-            transform: `translateX(${styles.offset}%)`
-          })}
-        >
-          {appRoutes.map((route, index) => (
-            <Route
-              key={index}
-              path={route.path}
-              exact={route.exact}
-              name={route.name}
-              render={routeProps => (
-                <React.Fragment>
-                  <route.component {...routeProps} />
-                </React.Fragment>
-              )}
-            />
-          ))}
-        </AnimatedSwitch>
+        {!appLoading && (
+          <AnimatedSwitch
+            {...pageTransitions}
+            className="switch-wrapper"
+            mapStyles={styles => ({
+              opacity: styles.opacity,
+              transform: `translateX(${styles.offset}%)`
+            })}
+          >
+            {appRoutes.map((route, index) => (
+              <Route
+                key={index}
+                path={route.path}
+                exact={route.exact}
+                name={route.name}
+                render={routeProps => (
+                  <React.Fragment>
+                    <route.component {...routeProps} />
+                  </React.Fragment>
+                )}
+              />
+            ))}
+          </AnimatedSwitch>
+        )}
         <LoadingScreen show={appLoading} />
       </AppContainer>
     </Router>
