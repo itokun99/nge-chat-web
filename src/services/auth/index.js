@@ -1,22 +1,60 @@
-import { API } from 'configs';
 import { handleAsync } from 'utils';
-import { store, setProfile } from 'modules';
+import { store, firebaseService, clearProfile } from 'modules';
 
 const { dispatch } = store;
 
-
-export const login = async (payload = {}) => {
-  const [res, err] = await handleAsync(API.login(payload));
-  if(err) throw err;
-  
-  const { data } = res;
-  
-  dispatch(setProfile(data));
-  return data;
-}
-
+/**
+ * a Service for register
+ * @param {*} payload payload require { name, email, password }
+ */
 export const register = async (payload = {}) => {
-  const [res, err] = await handleAsync(API.register(payload));
-  if(err) throw err;
+  try {
+    const res = await firebaseService.register(payload);
+    const { user } = res;
+
+    const userForm = {
+      userId: user.uid,
+      name: payload.name,
+      email: payload.email
+    };
+
+    // profile creation in database
+    await firebaseService.createUserData(userForm);
+
+    return res;
+  } catch (err) {
+    throw err;
+  }
+};
+
+/**
+ * a Service for login
+ * @param {*} payload payload require { email, password }
+ */
+export const login = async (payload = {}) => {
+  const [res, err] = await handleAsync(firebaseService.login(payload));
+
+  if (err) throw err;
   return res;
-}
+};
+
+/**
+ * a Service for login / register with google
+ */
+export const loginGoogle = async () => {
+  const [res, err] = await handleAsync(firebaseService.loginWithGoogle());
+
+  if (err) throw err;
+
+  return res;
+};
+
+/**
+ * a Service for logout
+ */
+export const logout = async () => {
+  const [res, err] = await handleAsync(firebaseService.logout());
+  if (err) throw err;
+  dispatch(clearProfile());
+  return res;
+};

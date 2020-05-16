@@ -4,16 +4,14 @@ import {
   Route,
   AnimatedSwitch,
   spring,
-  Redirect,
   connect,
-  PropTypes,
-  useHistory
+  PropTypes
 } from 'libraries';
 import { AppContainer } from 'containers';
-import { LoadingScreen, AppRoute } from 'components';
+import { LoadingScreen } from 'components';
 import { appRoutes } from 'routes';
-import { firebaseService, profileSelector } from 'modules';
-import { showPopup, getProfile } from 'services';
+import { profileSelector } from 'modules';
+import { getProfile } from 'services';
 
 function glide(val) {
   return spring(val, {

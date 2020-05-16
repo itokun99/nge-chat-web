@@ -1,6 +1,5 @@
-import { React, ReactDOM, Provider, firebase } from 'libraries';
+import { React, ReactDOM, Provider } from 'libraries';
 import { store } from 'modules';
-import { appConfig } from 'configs';
 import App from './App';
 import 'assets/scss/index.scss';
 import * as serviceWorker from './serviceWorker';

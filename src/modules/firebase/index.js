@@ -2,115 +2,96 @@ import { firebase } from 'libraries';
 import { appConfig } from 'configs';
 import { handleAsync } from 'utils';
 
-class Firebase {
-  constructor() {
-    if (!firebase.apps.length) {
-      this.init();
-    }
+// initializeApp
+firebase.initializeApp(appConfig.firebase);
 
-    this.auth = firebase.auth;
-    this.db = firebase.database();
-  }
-
-  init = () => {
-    firebase.initializeApp(appConfig.firebase);
-  };
-
-  register = async (payload = {}) => {
-    const [res, err] = await handleAsync(
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(payload.email, payload.password)
-    );
-
-    if (err) throw err;
-
-    const [res1, err1] = await handleAsync(
-      this.createUserData({
-        userId: res.user.uid,
+const createUserData = async (payload = {}) => {
+  try {
+    await firebase
+      .database()
+      .ref(`users/${payload.userId}`)
+      .set({
+        userId: payload.userId,
         name: payload.name,
-        email: payload.email
-      })
-    );
+        email: payload.email,
+        photo: payload.photo || null
+      });
 
-    if (err1) {
-      throw err1;
-    }
-
-    return res;
-  };
-
-  loginWithGoogle = () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    return firebase.auth().signInWithPopup(provider);
-  };
-
-  login = async (payload = {}) => {
-    try {
-      const response = await firebase
-        .auth()
-        .signInWithEmailAndPassword(payload.email, payload.password);
-      return response;
-    } catch (err) {
-      throw err;
-    }
-  };
-
-  logout = async () => {
-    try {
-      const response = await firebase.auth().signOut();
-      return response;
-    } catch (err) {
-      throw err;
-    }
-  };
-
-  loginWithCredential = async (payload = {}) => {
-    try {
-      const response = await firebase.auth.EmailAuthProvider.credential(
-        payload.email,
-        payload.password
-      );
-      return response;
-    } catch (err) {
-      throw err;
-    }
-  };
-
-  getCurrentUser = () => {
-    const user = firebase.auth().currentUser;
-    return user;
-  };
-
-  createUserData = async (payload = {}) => {
-    const [res, err] = await handleAsync(
-      firebase
-        .database()
-        .ref(`users/${payload.userId}`)
-        .set({
-          userId: payload.userId,
-          name: payload.name,
-          email: payload.email,
-          photo: payload.photo || null
-        })
-    );
-
-    if (err) throw err;
     return payload;
-  };
+  } catch (err) {
+    throw err;
+  }
+};
 
-  getUserData = () => {
-    const userId = firebase.auth().currentUser.uid;
-    const promise = new Promise((resolve, reject) => {
-      firebase
-        .database()
-        .ref(`users/${userId}`)
-        .on('value', snapshot => {
-          resolve(snapshot.val());
-        });
-    });
-    return promise;
-  };
-}
+const getUserData = () => {
+  const userId = firebase.auth().currentUser.uid;
+  const promise = new Promise(resolve => {
+    firebase
+      .database()
+      .ref(`users/${userId}`)
+      .on('value', snapshot => {
+        resolve(snapshot.val());
+      });
+  });
+  return promise;
+};
 
-export const firebaseService = new Firebase();
+const authUser = () => {
+  const promise = new Promise((resolve, reject) =>
+    firebase.auth().onAuthStateChanged(
+      user => {
+        resolve(user);
+      },
+      error => {
+        reject(error);
+      }
+    )
+  );
+
+  return promise;
+};
+
+const register = async (payload = {}) => {
+  const [res, err] = await handleAsync(
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(payload.email, payload.password)
+  );
+  if (err) throw err;
+  return res;
+};
+
+const login = async (payload = {}) => {
+  try {
+    const response = await firebase
+      .auth()
+      .signInWithEmailAndPassword(payload.email, payload.password);
+    return response;
+  } catch (err) {
+    throw err;
+  }
+};
+
+const logout = async () => {
+  const [res, err] = await handleAsync(firebase.auth().signOut());
+  if (err) throw err;
+  return res;
+};
+
+const loginWithGoogle = () => {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  return firebase
+    .auth()
+    .signInWithPopup(provider)
+    .then(res => res);
+};
+
+export const firebaseService = {
+  register,
+  login,
+  logout,
+  loginWithGoogle,
+  getUserData,
+  createUserData,
+  authUser
+};

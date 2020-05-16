@@ -1,19 +1,8 @@
-import { React, Link, useHistory, connect, PropTypes } from 'libraries';
-import { BaseContainer } from 'containers';
-import { Button } from 'components';
-import { showPopup } from 'services';
-import { profileSelector } from 'modules';
+import { React, Link } from 'libraries';
+import { BaseContainer, AuthContainer } from 'containers';
 
-const Homepage = ({ profile }) => {
-  const history = useHistory();
-
-  React.useEffect(() => {
-    if (profile) {
-      history.replace('/dashboard/');
-    }
-  }, [history, profile]);
-
-  return (
+const Homepage = () => (
+  <AuthContainer>
     <BaseContainer disableHeader>
       <div className="Homepage">
         <div className="Homepage__content">
@@ -25,19 +14,6 @@ const Homepage = ({ profile }) => {
         </div>
       </div>
     </BaseContainer>
-  );
-};
-
-Homepage.propTypes = {
-  profile: PropTypes.object
-};
-
-Homepage.defaultProps = {
-  profile: null
-};
-
-const reduxState = state => ({
-  profile: profileSelector(state)
-});
-
-export default connect(reduxState)(Homepage);
+  </AuthContainer>
+);
+export default Homepage;
