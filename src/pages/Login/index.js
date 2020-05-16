@@ -1,18 +1,10 @@
-import {
-  React,
-  Link,
-  useHistory,
-  PropTypes,
-  useState,
-  connect
-} from 'libraries';
-import { BaseContainer } from 'containers';
+import { React, Link, useHistory, useState } from 'libraries';
+import { BaseContainer, AuthContainer } from 'containers';
 import { Input, FormGroup, Button } from 'components';
-import { firebaseService, profileSelector } from 'modules';
-import { showPopup } from 'services';
+import { showPopup, login, loginGoogle } from 'services';
 import { validateEmail, handleAsync } from 'utils';
 
-const Login = ({ profile }) => {
+const Login = () => {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [email, changeEmail] = useState('', { name: 'email' });
@@ -36,7 +28,7 @@ const Login = ({ profile }) => {
 
     setLoading(true);
     try {
-      await firebaseService.login({ email, password });
+      await login({ email, password });
       setLoading(false);
       showPopup({
         title: 'Berhasil Masuk',
@@ -54,7 +46,7 @@ const Login = ({ profile }) => {
 
   const submitGoogle = async () => {
     setLoading(true);
-    const [res, err] = await handleAsync(firebaseService.loginWithGoogle());
+    const [res, err] = await handleAsync(loginGoogle());
     setLoading(false);
     if (err) {
       showPopup({
@@ -73,74 +65,58 @@ const Login = ({ profile }) => {
     return res;
   };
 
-  React.useEffect(() => {
-    if (profile) {
-      history.replace('/dashboard/');
-    }
-  }, [history, profile]);
-
   return (
-    <BaseContainer
-      disableRightAction
-      onPressLeft={() => history.goBack()}
-      headerProps={{
-        theme: 'light',
-        transparent: true
-      }}
-    >
-      <div className="Login">
-        <div className="Login__content">
-          <h1 className="Login__title">Masuk</h1>
-          <FormGroup>
-            <Input
-              value={email}
-              onChange={e => changeEmail(e.target.value)}
-              type="text"
-              placeholder="Email"
-            />
-          </FormGroup>
-          <FormGroup>
-            <Input
-              value={password}
-              onChange={e => changePassword(e.target.value)}
-              type="password"
-              placeholder="Kata Sandi"
-            />
-          </FormGroup>
-          <Button block disabled={loading} onClick={submit}>
-            Masuk
-          </Button>
-          <div className="Login__divider"></div>
+    <AuthContainer>
+      <BaseContainer
+        disableRightAction
+        onPressLeft={() => history.goBack()}
+        headerProps={{
+          theme: 'light',
+          transparent: true
+        }}
+      >
+        <div className="Login">
+          <div className="Login__content">
+            <h1 className="Login__title">Masuk</h1>
+            <FormGroup>
+              <Input
+                value={email}
+                onChange={e => changeEmail(e.target.value)}
+                type="text"
+                placeholder="Email"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Input
+                value={password}
+                onChange={e => changePassword(e.target.value)}
+                type="password"
+                placeholder="Kata Sandi"
+              />
+            </FormGroup>
+            <Button block disabled={loading} onClick={submit}>
+              Masuk
+            </Button>
+            <div className="Login__divider"></div>
 
-          <Button
-            color="danger"
-            block
-            disabled={loading}
-            onClick={submitGoogle}
-          >
-            Masuk dengan Google
-          </Button>
+            <Button
+              color="danger"
+              block
+              disabled={loading}
+              onClick={submitGoogle}
+            >
+              Masuk dengan Google
+            </Button>
+          </div>
+          <div className="Login__bottom">
+            <span>
+              Belum punya akun? daftar <Link to="/register">disini</Link>
+            </span>
+          </div>
         </div>
-        <div className="Login__bottom">
-          <span>
-            Belum punya akun? daftar <Link to="/register">disini</Link>
-          </span>
-        </div>
-      </div>
-    </BaseContainer>
+      </BaseContainer>
+    </AuthContainer>
   );
 };
 
-Login.propTypes = {
-  profile: PropTypes.object
-};
-
-Login.defaultProps = {
-  profile: null
-};
-
-const reduxState = state => ({
-  profile: profileSelector(state)
-});
-
-export default connect(reduxState)(Login);
+export default Login;

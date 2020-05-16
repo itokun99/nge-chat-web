@@ -1,19 +1,10 @@
-import {
-  React,
-  Link,
-  useHistory,
-  useState,
-  firebase,
-  PropTypes,
-  connect
-} from 'libraries';
-import { BaseContainer } from 'containers';
+import { React, Link, useHistory, useState } from 'libraries';
+import { BaseContainer, AuthContainer } from 'containers';
 import { Input, FormGroup, Button } from 'components';
-import { firebaseService, profileSelector } from 'modules';
-import { showPopup } from 'services';
+import { showPopup, register, loginGoogle } from 'services';
 import { validateEmail, handleAsync } from 'utils';
 
-const Register = ({ profile }) => {
+const Register = () => {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [name, changeName] = useState('');
@@ -51,7 +42,7 @@ const Register = ({ profile }) => {
     };
 
     setLoading(true);
-    const [res, err] = await handleAsync(firebaseService.register(payload));
+    const [res, err] = await handleAsync(register(payload));
     setLoading(false);
     if (err) {
       showPopup({
@@ -75,7 +66,7 @@ const Register = ({ profile }) => {
 
   const submitGoogle = async () => {
     setLoading(true);
-    const [res, err] = await handleAsync(firebaseService.loginWithGoogle());
+    const [res, err] = await handleAsync(loginGoogle());
     setLoading(false);
     if (err) {
       showPopup({
@@ -94,94 +85,78 @@ const Register = ({ profile }) => {
     return res;
   };
 
-  React.useEffect(() => {
-    if (profile) {
-      history.replace('/dashboard/');
-    }
-  }, [history, profile]);
-
   return (
-    <BaseContainer
-      disableRightAction
-      onPressLeft={() => history.goBack()}
-      headerProps={{
-        theme: 'light',
-        transparent: true
-      }}
-    >
-      <div className="Register">
-        <div className="Register__content">
-          <h1 className="Register__title">Daftar Nge-Chat</h1>
-          <div className="Register__description">
-            Gabung dan jadi bagian dari komunitas nge-chat bersama orang
-            terdekat
-          </div>
-          <FormGroup>
-            <Input
-              value={name}
-              onChange={e => changeName(e.target.value)}
-              type="text"
-              placeholder="Nama lengkap"
-            />
-          </FormGroup>
-          <FormGroup>
-            <Input
-              value={email}
-              onChange={e => changeEmail(e.target.value)}
-              type="text"
-              placeholder="Email"
-            />
-          </FormGroup>
-          <FormGroup>
-            <Input
-              value={password}
-              onChange={e => changePassword(e.target.value)}
-              type="password"
-              placeholder="Kata Sandi"
-            />
-          </FormGroup>
-          <FormGroup>
-            <Input
-              value={password2}
-              onChange={e => changePassword2(e.target.value)}
-              type="password"
-              placeholder="Konfirmasi Kata Sandi"
-            />
-          </FormGroup>
-          <Button block onClick={submit} disabled={loading}>
-            Daftar
-          </Button>
-          <div className="Register__divider"></div>
+    <AuthContainer>
+      <BaseContainer
+        disableRightAction
+        onPressLeft={() => history.goBack()}
+        headerProps={{
+          theme: 'light',
+          transparent: true
+        }}
+      >
+        <div className="Register">
+          <div className="Register__content">
+            <h1 className="Register__title">Daftar Nge-Chat</h1>
+            <div className="Register__description">
+              Gabung dan jadi bagian dari komunitas nge-chat bersama orang
+              terdekat
+            </div>
+            <FormGroup>
+              <Input
+                value={name}
+                onChange={e => changeName(e.target.value)}
+                type="text"
+                placeholder="Nama lengkap"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Input
+                value={email}
+                onChange={e => changeEmail(e.target.value)}
+                type="text"
+                placeholder="Email"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Input
+                value={password}
+                onChange={e => changePassword(e.target.value)}
+                type="password"
+                placeholder="Kata Sandi"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Input
+                value={password2}
+                onChange={e => changePassword2(e.target.value)}
+                type="password"
+                placeholder="Konfirmasi Kata Sandi"
+              />
+            </FormGroup>
+            <Button block onClick={submit} disabled={loading}>
+              Daftar
+            </Button>
+            <div className="Register__divider"></div>
 
-          <Button
-            color="danger"
-            block
-            disabled={loading}
-            onClick={submitGoogle}
-          >
-            Daftar dengan Google
-          </Button>
+            <Button
+              color="danger"
+              block
+              disabled={loading}
+              onClick={submitGoogle}
+            >
+              Daftar dengan Google
+            </Button>
+          </div>
+          <div className="Register__bottom">
+            <span>
+              Sudah Punya akun? masuk <Link to="/login">disini</Link>
+            </span>
+          </div>
         </div>
-        <div className="Register__bottom">
-          <span>
-            Sudah Punya akun? masuk <Link to="/login">disini</Link>
-          </span>
-        </div>
-      </div>
-    </BaseContainer>
+      </BaseContainer>
+    </AuthContainer>
   );
 };
 
-Register.propTypes = {
-  profile: PropTypes.object
-};
-
-Register.defaultProps = {
-  profile: null
-};
-
-const reduxState = state => ({
-  profile: profileSelector(state)
-});
-
-export default connect(reduxState)(Register);
+export default Register;
