@@ -42,6 +42,7 @@ const BaseContainer = ({
             title={title}
             onPressLeft={handlePressLeft}
             onPressRight={onPressRight}
+            leftComponent={sidebar ? <MdMenu size={32} /> : null}
             {...headerProps}
           />
         </div>
@@ -67,7 +68,7 @@ BaseContainer.propTypes = {
 
 BaseContainer.defaultProps = {
   disableHeader: false,
-  sidebar: true,
+  sidebar: false,
   onPressLeft: () => {},
   onPressRight: () => {}
 };

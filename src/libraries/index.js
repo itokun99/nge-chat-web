@@ -13,7 +13,12 @@ import {
   MdArrowForward,
   MdArrowUpward,
   MdCheck,
-  MdMenu
+  MdMenu,
+  MdHome,
+  MdContacts,
+  MdChatBubble,
+  MdSettings,
+  MdError
 } from 'react-icons/md';
 
 export {
@@ -27,7 +32,12 @@ export {
   MdArrowBack,
   MdClose,
   MdArrowForward,
+  MdSettings,
   MdArrowUpward,
+  MdError,
+  MdHome,
+  MdChatBubble,
+  MdContacts,
   MdCheck,
   firebase,
   MdMenu

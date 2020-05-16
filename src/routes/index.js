@@ -1,3 +1,3 @@
-import appRoutes from "./appRoutes";
+import appRoutes from './appRoutes';
 
 export { appRoutes };

@@ -1,4 +1,4 @@
-import { Homepage, About, Login, Register, Dashboard } from 'pages';
+import { Homepage, About, Login, Register, Dashboard, Setting } from 'pages';
 
 const appRoutes = [
   {
@@ -7,6 +7,13 @@ const appRoutes = [
     exact: true,
     path: '/about',
     auth: false
+  },
+  {
+    name: 'Setting',
+    component: Setting,
+    exact: true,
+    path: '/setting',
+    auth: true
   },
   {
     name: 'Dashboard',

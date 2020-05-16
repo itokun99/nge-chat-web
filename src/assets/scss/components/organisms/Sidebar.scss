@@ -1,5 +1,5 @@
 .SidebarDrop {
-  transition: .5s ease;
+  transition: .2s ease;
   position: fixed;
   left: 0;
   bottom: 0;
@@ -25,7 +25,7 @@
   height: 100%;
   overflow: auto;
   background-color: $light;
-  transition: .5s;
+  transition: .2s;
   z-index: 2;
   opacity: 0;
   transform: translateX(-100%);

@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import { React, PropTypes, cx, useState } from 'libraries';
-import { ProfileSidebar } from 'components/molecules';
+import { ProfileSidebar, MenuSidebar } from 'components/molecules';
 
 const Sidebar = ({ show, onHide, onVisible, onDropClick }) => {
   const [visible, changeVisible] = useState(false);
@@ -46,6 +46,7 @@ const Sidebar = ({ show, onHide, onVisible, onDropClick }) => {
       <div className={dropClass} onClick={handleDrop}></div>
       <div className={sidebarClass}>
         <ProfileSidebar />
+        <MenuSidebar />
       </div>
     </React.Fragment>
   );
