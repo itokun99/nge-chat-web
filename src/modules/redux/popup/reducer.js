@@ -6,7 +6,10 @@ const initialState = {
   onClickButton: null,
   show: false,
   buttonTitle: 'ok',
-  customButton: null
+  buttonSecondTitle: 'batal',
+  customButton: null,
+  showSecondButton: false,
+  onClickSecondButton: null
 };
 
 const popup = (state = initialState, action) => {

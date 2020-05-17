@@ -1,0 +1,21 @@
+.NotFound404 {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 $gutter-m;
+
+  &__title {
+    font-size: $font-jumbo * 2;
+    line-height: 100px;
+    margin: 0;
+    margin-bottom: $gutter-m;
+  }
+
+  &__description {
+    line-height: 1.6;
+    margin-bottom: $gutter-m;
+  }
+}

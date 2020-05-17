@@ -3,5 +3,13 @@ import Popup from './Popup';
 import LoadingScreen from './LoadingScreen';
 import ProfileSidebar from './ProfileSidebar';
 import MenuSidebar from './MenuSidebar';
+import ImageInput from './ImageInput';
 
-export { AppHeader, Popup, LoadingScreen, ProfileSidebar, MenuSidebar };
+export {
+  AppHeader,
+  Popup,
+  LoadingScreen,
+  ProfileSidebar,
+  MenuSidebar,
+  ImageInput
+};

@@ -12,6 +12,14 @@
     height: 150px;
     background-size: contain;
     background-position: center;
-    margin-bottom: $gutter-m
+    margin-bottom: $gutter-m;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__letterName {
+    color: $light;
+    font-size: $font-jumbo;
   }
 }

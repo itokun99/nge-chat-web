@@ -1,3 +1,4 @@
 import Sidebar from './Sidebar';
+import AccountForm from './AccountForm';
 
-export { Sidebar };
+export { Sidebar, AccountForm };

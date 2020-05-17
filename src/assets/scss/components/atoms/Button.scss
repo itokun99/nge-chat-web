@@ -23,6 +23,7 @@
   @include color('warning', $dark, $color-warning);
   @include color('info', $dark, $color-info);
   @include color('secondary', $light, $color-secondary);
+  @include color('gray', $light, $dark-gray);
 
 
   &--block {

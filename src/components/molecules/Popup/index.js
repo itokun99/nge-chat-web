@@ -8,15 +8,39 @@ const Popup = ({ data }) => {
     'Popup--show': data.show
   });
 
+  const handleClickButton = () => {
+    if (data.onClickButton) {
+      data.onClickButton();
+    }
+    hidePopup();
+  };
+
+  const handleClickSecondButton = () => {
+    if (data.onClickSecondButton) {
+      data.onClickSecondButton();
+    }
+    hidePopup();
+  };
+
   const renderAction = () => {
     if (data.customButton) {
       return <div className="Popup__action">{data.customButton}</div>;
     }
     return (
       <div className="Popup__action">
-        <Button block onClick={data.onClickButton || hidePopup}>
+        <Button block onClick={handleClickButton}>
           {data.buttonTitle}
         </Button>
+        {data.showSecondButton && (
+          <Button
+            color="gray"
+            style={{ marginTop: 8 }}
+            block
+            onClick={handleClickSecondButton}
+          >
+            {data.buttonSecondTitle}
+          </Button>
+        )}
       </div>
     );
   };

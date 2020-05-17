@@ -1,11 +1,21 @@
 import { React, PropTypes, connect } from 'libraries';
 import { profileSelector } from 'modules';
 import { Image, Skeleton } from 'components/atoms';
+import { getInitialName } from 'utils';
 
 const ProfileSidebar = ({ profile }) => {
   const renderPhoto = () => {
     if (!profile) {
       return <Skeleton circle width={150} />;
+    }
+
+    if (!profile.photo) {
+      const letterName = getInitialName(profile.name);
+      return (
+        <div className="ProfileSidebar__photo">
+          <span className="ProfileSidebar__letterName">{letterName}</span>
+        </div>
+      );
     }
 
     return (

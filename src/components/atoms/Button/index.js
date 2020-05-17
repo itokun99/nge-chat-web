@@ -48,7 +48,8 @@ Button.propTypes = {
     'success',
     'info',
     'warning',
-    'danger'
+    'danger',
+    'gray'
   ]),
   size: PropTypes.oneOf(['small', 'medium', 'large'])
 };

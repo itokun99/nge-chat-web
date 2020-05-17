@@ -1,0 +1,42 @@
+.ImageInput {
+  $block: ImageInput;
+  position: relative;
+  height: 200px;
+  width: 200px;
+  background-color: $dark-gray;
+  overflow: hidden;
+  margin: auto;
+  border-radius: 50%;
+
+  &__icon {
+    transition: .3s ease;
+    color: $light;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+  }
+
+  &__input {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    cursor: pointer;
+    opacity: 0;
+  }
+
+
+  &:hover {
+    .#{$block}__icon {
+      opacity: 1;
+    }
+  }
+}
