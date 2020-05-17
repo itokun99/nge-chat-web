@@ -18,7 +18,6 @@ const Dashboard = () => (
           <h1 className="Dashboard__title">Selamat Datang!</h1>
           <div className="Dashboard__description">
             Ayo mulai nge-chat bareng orang-orang di sekitar mu
-            <Button onClick={logout}>Logout</Button>
           </div>
         </div>
 
