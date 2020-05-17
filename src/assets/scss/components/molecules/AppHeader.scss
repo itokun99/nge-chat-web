@@ -1,5 +1,6 @@
 .AppHeader {
-  height: 60px;
+  $block: AppHeader;
+  height: $app-header-height;
   background-color: $theme-primary;
   color: $light;
   display: flex;
@@ -13,7 +14,7 @@
 
   &__left,
   &__right {
-    width: 60px;
+    width: $app-header-height;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -31,12 +32,17 @@
     font-size: $font-m;
   }
 
+  &--disableShadow {
+    box-shadow: none;
+  }
+
   &--transparent {
     background-color: transparent;
     box-shadow: none;
   }
 
   &--light {
+    background-color: $light;
     color: $dark
   }
 

@@ -18,7 +18,9 @@ import {
   MdContacts,
   MdChatBubble,
   MdSettings,
-  MdError
+  MdError,
+  MdAccountCircle,
+  MdHelp
 } from 'react-icons/md';
 
 export {
@@ -34,13 +36,15 @@ export {
   MdArrowForward,
   MdSettings,
   MdArrowUpward,
+  MdAccountCircle,
   MdError,
   MdHome,
   MdChatBubble,
   MdContacts,
   MdCheck,
   firebase,
-  MdMenu
+  MdMenu,
+  MdHelp
 };
 
 export * from 'react';

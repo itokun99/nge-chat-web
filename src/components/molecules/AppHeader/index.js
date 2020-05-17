@@ -11,11 +11,13 @@ const AppHeader = ({
   transparent,
   theme,
   leftComponent,
-  rightComponent
+  rightComponent,
+  disableShadow
 }) => {
   const appHeaderClass = cx('AppHeader', {
     [`AppHeader--transparent`]: transparent,
-    [`AppHeader--${theme}`]: theme
+    [`AppHeader--${theme}`]: theme,
+    'AppHeader--disableShadow': disableShadow
   });
 
   return (
@@ -58,7 +60,8 @@ AppHeader.propTypes = {
   transparent: PropTypes.bool,
   leftComponent: PropTypes.any,
   rightComponent: PropTypes.any,
-  theme: PropTypes.oneOf(['dark', 'light'])
+  theme: PropTypes.oneOf(['dark', 'light']),
+  disableShadow: PropTypes.bool
 };
 
 AppHeader.defaultProps = {
@@ -70,7 +73,8 @@ AppHeader.defaultProps = {
   leftComponent: null,
   rightComponent: null,
   onPressLeft: () => {},
-  onPressRight: () => {}
+  onPressRight: () => {},
+  disableShadow: false
 };
 
 export default AppHeader;

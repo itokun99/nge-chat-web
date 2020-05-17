@@ -1,0 +1,43 @@
+.Setting {
+  $block: Setting;
+  padding-top: $app-header-height;
+
+  &__item {
+    transition: .3s ease;
+    text-decoration: none;
+    color: $dark;
+    display: flex;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  &__icon {
+    display: flex;
+    width: 70px;
+    height: 70px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__itemText {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: $gutter-m;
+  }
+
+  &__itemTitle {
+    width: 100%;
+    display: block;
+    font-weight: 600;
+    margin-bottom: $gutter-xxs;
+  }
+
+  &__itemDescription {
+    opacity: 0.6;
+    font-size: $font-xxs;
+  }
+}
