@@ -1,4 +1,12 @@
-import { Homepage, About, Login, Register, Dashboard, Setting } from 'pages';
+import {
+  Homepage,
+  About,
+  Login,
+  Register,
+  Dashboard,
+  Setting,
+  NotFound404
+} from 'pages';
 
 const appRoutes = [
   {
@@ -41,6 +49,13 @@ const appRoutes = [
     component: Homepage,
     exact: true,
     path: '/',
+    auth: false
+  },
+  {
+    name: 'Not Found 404',
+    component: NotFound404,
+    exact: true,
+    path: '*',
     auth: false
   }
 ];
