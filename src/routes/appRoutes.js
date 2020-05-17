@@ -5,7 +5,8 @@ import {
   Register,
   Dashboard,
   Setting,
-  NotFound404
+  NotFound404,
+  Account
 } from 'pages';
 
 const appRoutes = [
@@ -15,6 +16,13 @@ const appRoutes = [
     exact: true,
     path: '/about',
     auth: false
+  },
+  {
+    name: 'Account',
+    component: Account,
+    exact: true,
+    path: '/setting/account',
+    auth: true
   },
   {
     name: 'Setting',

@@ -20,7 +20,8 @@ import {
   MdSettings,
   MdError,
   MdAccountCircle,
-  MdHelp
+  MdHelp,
+  MdPhotoCamera
 } from 'react-icons/md';
 
 export {
@@ -44,7 +45,8 @@ export {
   MdCheck,
   firebase,
   MdMenu,
-  MdHelp
+  MdHelp,
+  MdPhotoCamera
 };
 
 export * from 'react';

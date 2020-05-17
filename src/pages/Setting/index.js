@@ -43,7 +43,7 @@ const Setting = () => {
   return (
     <PrivateContainer>
       <BaseContainer
-        title="Setting"
+        title="Pengaturan"
         headerProps={{
           theme: 'light',
           disableRightAction: true,
@@ -54,6 +54,7 @@ const Setting = () => {
         <div className="Setting">
           {settings.map((setting, index) => (
             <Link
+              key={index}
               to={setting.path}
               className="Setting__item"
               title={setting.caption}

@@ -61,3 +61,23 @@ export const createProfileObj = data => ({
   userId: data.userId,
   photo: data.photo
 });
+
+export const getInitialName = nameString => {
+  if (!nameString) {
+    return '?';
+  }
+
+  const nameArr = nameString.toLowerCase().split(' ');
+  const firstLetterNames = nameArr.map((name, index) => {
+    if (index < 2) {
+      return name.substr(0, 1);
+    }
+    return '';
+  });
+
+  const result = firstLetterNames
+    .join()
+    .replace(/,/g, '')
+    .toUpperCase();
+  return result;
+};

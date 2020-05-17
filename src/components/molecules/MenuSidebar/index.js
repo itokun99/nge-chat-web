@@ -19,7 +19,7 @@ const menu = [
     path: '/contact'
   },
   {
-    name: 'Setting',
+    name: 'Pengaturan',
     icon: MdSettings,
     path: '/setting'
   },
