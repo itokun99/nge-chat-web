@@ -165,7 +165,6 @@ export const uploadToStorage = async file => {
   const storageRef = firebase.storage().ref();
   try {
     const snapshot = await storageRef.put(file);
-    console.log('snapshoot', snapshot);
     return snapshot;
   } catch (err) {
     throw err;
