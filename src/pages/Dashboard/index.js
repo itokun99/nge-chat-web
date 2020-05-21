@@ -16,6 +16,7 @@ const Dashboard = () => {
         }}
       >
         <div className="Dashboard">
+          <h1>Selamat Datang!</h1>
           <Button
             onClick={() => history.push('/search')}
             circle
