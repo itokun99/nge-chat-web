@@ -1,8 +1,9 @@
 import { React, PropTypes, connect, useState } from 'libraries';
 import { profileSelector } from 'modules';
-import { showPopup, logout } from 'services';
+import { showPopup, logout, updateProfile } from 'services';
 import { FormGroup, Input, Label, Button } from 'components/atoms';
 import { ImageInput } from 'components/molecules';
+import { handleAsync, createMessageFirebase } from 'utils';
 
 const AccountForm = ({ profile }) => {
   const [photo, changePhoto] = useState(null);
@@ -32,6 +33,37 @@ const AccountForm = ({ profile }) => {
     changePhoto(imageBase64);
   };
 
+  const handleSubmit = async () => {
+    if (!name) {
+      return showPopup({
+        title: 'Terjadi Kesalahan!',
+        description:
+          'Form tidak boleh kosong, isi dengan benar atau tidak merubah sama sekali!',
+        onClickButton: initData
+      });
+    }
+
+    const payload = {
+      name
+    };
+
+    const [res, err] = await handleAsync(updateProfile(payload));
+
+    if (err) {
+      return showPopup({
+        title: 'Terjadi kesalahan!',
+        description: createMessageFirebase(err.code)
+      });
+    }
+
+    showPopup({
+      title: 'Berhasil!',
+      description: 'Informasi profile kamu sudah berhasil di perbarui!'
+    });
+
+    return res;
+  };
+
   React.useEffect(() => {
     initData();
   }, [initData]);
@@ -51,16 +83,9 @@ const AccountForm = ({ profile }) => {
         />
       </FormGroup>
       <FormGroup>
-        <Label>Email</Label>
-        <Input
-          onChange={e => changeEmail(e.target.value)}
-          type="text"
-          value={email}
-          placeholder="Email"
-        />
-      </FormGroup>
-      <FormGroup>
-        <Button block>Simpan</Button>
+        <Button block onClick={handleSubmit}>
+          Simpan
+        </Button>
       </FormGroup>
       <FormGroup>
         <Button block>Laporkan Masalah</Button>

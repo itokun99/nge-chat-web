@@ -94,6 +94,45 @@ const loginWithGoogle = async () => {
   return response;
 };
 
+const updateUserProfile = async (payload = {}) => {
+  const user = firebase.auth().currentUser;
+
+  try {
+    if (payload.name) {
+      await user.updateProfile({ displayName: payload.name });
+    }
+    if (payload.photo) {
+      await user.updateProfile({ photo: payload.photo });
+    }
+
+    // if (payload.email) {
+    //   await user.updateEmail(payload.email);
+    // }
+
+    return user;
+  } catch (err) {
+    throw err;
+  }
+};
+
+/**
+ * a firebase service for update user data from firebase database
+ * @param {*} payload
+ */
+const updateUserData = (payload = {}) => {
+  const userId = firebase.auth().currentUser.uid;
+
+  return new Promise((resolve, reject) => {
+    const userRef = firebase.database().ref(`users/${userId}`);
+    userRef.update(payload, err => {
+      if (err) {
+        return reject(err);
+      }
+      return resolve(true);
+    });
+  });
+};
+
 /**
  * a firebase group all service
  */
@@ -103,5 +142,7 @@ export const firebaseService = {
   logout,
   loginWithGoogle,
   getUserData,
-  createUserData
+  createUserData,
+  updateUserData,
+  updateUserProfile
 };

@@ -42,3 +42,21 @@ export const getProfile = () => {
 
   return promise;
 };
+
+/**
+ * a Service for update current user data
+ * @param {*} payload
+ */
+export const updateProfile = async (payload = {}) => {
+  try {
+    await firebaseService.updateUserProfile(payload);
+    await firebaseService.updateUserData(payload);
+    const userData = await firebaseService.getUserData();
+    const userObj = createProfileObj({ ...userData });
+    dispatch(setProfile(userObj));
+    return userObj;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
