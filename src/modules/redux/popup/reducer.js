@@ -1,15 +1,15 @@
 import actionType from './actionType';
 
 const initialState = {
-  title: '',
-  description: '',
-  onClickButton: null,
-  show: false,
-  buttonTitle: 'ok',
-  buttonSecondTitle: 'batal',
-  customButton: null,
-  showSecondButton: false,
-  onClickSecondButton: null
+  title: '', // title of popup
+  description: '', // description of popup
+  onClickButton: null, // action button primary in popup
+  show: false, // handle for visibility
+  buttonTitle: 'ok', // button primary title
+  buttonSecondTitle: 'batal', // button secondary title
+  customButton: null, // a custom component for button
+  showSecondButton: false, // handle for visibility button secondary
+  onClickSecondButton: null // action button secondary
 };
 
 const popup = (state = initialState, action) => {
