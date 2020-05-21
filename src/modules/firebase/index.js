@@ -95,6 +95,70 @@ const loginWithGoogle = async () => {
 };
 
 /**
+ * TODO: refactor
+ * @param {*} payload
+ */
+const updateUserProfile = async (payload = {}) => {
+  const user = firebase.auth().currentUser;
+
+  try {
+    if (payload.name) {
+      await user.updateProfile({ displayName: payload.name });
+    }
+    if (payload.photo) {
+      await user.updateProfile({ photo: payload.photo });
+    }
+
+    // if (payload.email) {
+    //   await user.updateEmail(payload.email);
+    // }
+
+    return user;
+  } catch (err) {
+    throw err;
+  }
+};
+
+/**
+ * a firebase service for update user data from firebase database
+ * @param {*} payload
+ */
+const updateUserData = (payload = {}) => {
+  const userId = firebase.auth().currentUser.uid;
+
+  return new Promise((resolve, reject) => {
+    const userRef = firebase.database().ref(`users/${userId}`);
+    userRef.update(payload, err => {
+      if (err) {
+        return reject(err);
+      }
+      return resolve(true);
+    });
+  });
+};
+
+/**
+ * a firebase service for get all users data
+ */
+const getUsers = async () => {
+  try {
+    const usersSnapshot = await firebase
+      .database()
+      .ref('/users')
+      .once('value');
+    const usersData = usersSnapshot.val();
+    let users = [];
+
+    if (usersData) {
+      users = Object.keys(usersData).map(key => usersData[key]);
+    }
+    return users;
+  } catch (err) {
+    throw err;
+  }
+};
+
+/**
  * a firebase group all service
  */
 export const firebaseService = {
@@ -103,5 +167,8 @@ export const firebaseService = {
   logout,
   loginWithGoogle,
   getUserData,
-  createUserData
+  createUserData,
+  updateUserData,
+  updateUserProfile,
+  getUsers
 };

@@ -9,7 +9,16 @@
     background-color: $dark-gray;
     border-radius: 50%;
     margin-right: $gutter-sm;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $light;
+    font-weight: bold;
+    font-size: $font-l;
+    line-height: 18px;
   }
+
+  &__image-title {}
 
   &__textWrapper {
     flex: 1;

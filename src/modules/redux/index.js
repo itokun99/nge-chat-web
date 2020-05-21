@@ -1,10 +1,11 @@
 import {
-  combineReducers,
-  createStore,
   thunk,
+  createStore,
+  combineReducers,
   applyMiddleware,
   composeWithDevTools
 } from 'libraries';
+import user from './user/reducer';
 import post from './post/reducer';
 import popup from './popup/reducer';
 import profile from './profile/reducer';
@@ -13,8 +14,9 @@ import profile from './profile/reducer';
  * reducer
  */
 export const reducer = combineReducers({
-  popup,
+  user,
   post,
+  popup,
   profile
 });
 
@@ -29,13 +31,15 @@ export const store = createStore(
 /**
  * dispatcher
  */
-export * from './popup/action';
+export * from './user/action';
 export * from './post/action';
+export * from './popup/action';
 export * from './profile/action';
 
 /**
  * selector
  */
-export * from './popup/selector';
+export * from './user/selector';
 export * from './post/selector';
+export * from './popup/selector';
 export * from './profile/selector';
