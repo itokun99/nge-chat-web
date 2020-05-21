@@ -14,10 +14,10 @@ const AccountForm = ({ profile }) => {
 
   const initData = React.useCallback(() => {
     if (profile) {
-      changePhoto(profile.photo);
-      changeName(profile.name);
-      changeEmail(profile.email);
-      changeBio(profile.bio);
+      changePhoto(profile.photo || '');
+      changeName(profile.name || '');
+      changeEmail(profile.email || '');
+      changeBio(profile.bio || '');
     }
   }, [profile]);
 
@@ -62,6 +62,7 @@ const AccountForm = ({ profile }) => {
     const [res, err] = await handleAsync(updateProfile(payload));
 
     if (err) {
+      console.log(err);
       return showPopup({
         title: 'Terjadi kesalahan!',
         description: createMessageFirebase(err.code)
