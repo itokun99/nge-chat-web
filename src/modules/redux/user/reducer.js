@@ -2,7 +2,8 @@ import actionType from './actionType';
 
 const initialState = {
   all: [],
-  filterText: ''
+  filterText: '',
+  contacts: []
 };
 
 const user = (state = initialState, action) => {
@@ -21,6 +22,17 @@ const user = (state = initialState, action) => {
       return {
         ...state,
         filterText: action.value
+      };
+
+    case actionType.SET_USER_CONTACT:
+      return {
+        ...state,
+        contacts: action.value
+      };
+    case actionType.CLEAR_USER_CONTACT:
+      return {
+        ...state,
+        contacts: initialState.contacts
       };
     default:
       return state;

@@ -140,19 +140,14 @@ const updateUserData = (payload = {}) => {
 /**
  * a firebase service for get all users data
  */
-const getUsers = async () => {
+const getUserWithUserId = async userId => {
   try {
     const usersSnapshot = await firebase
       .database()
-      .ref('/users')
+      .ref(`/users/${userId}`)
       .once('value');
     const usersData = usersSnapshot.val();
-    let users = [];
-
-    if (usersData) {
-      users = Object.keys(usersData).map(key => usersData[key]);
-    }
-    return users;
+    return usersData;
   } catch (err) {
     throw err;
   }
@@ -161,11 +156,42 @@ const getUsers = async () => {
 /**
  * a firebase service for upload image to firebase storage
  */
-export const uploadToStorage = async file => {
+const uploadToStorage = async file => {
   const storageRef = firebase.storage().ref();
   try {
     const snapshot = await storageRef.put(file);
     return snapshot;
+  } catch (err) {
+    throw err;
+  }
+};
+
+/**
+ * a firebase service for add contact
+ */
+const addUserContact = (payload = {}) => {
+  const userId = firebase.auth().currentUser.uid;
+
+  return firebase
+    .database()
+    .ref(`/userContact`)
+    .set({
+      [`${userId}`]: payload.data
+    });
+};
+
+const getUserContact = async () => {
+  const userId = firebase.auth().currentUser.uid;
+
+  try {
+    const snapshot = await firebase
+      .database()
+      .ref(`/userContact`)
+      .child(`${userId}`)
+      .once('value');
+
+    const data = snapshot.val();
+    return data;
   } catch (err) {
     throw err;
   }
@@ -183,5 +209,8 @@ export const firebaseService = {
   createUserData,
   updateUserData,
   updateUserProfile,
-  getUsers
+  getUserWithUserId,
+  uploadToStorage,
+  addUserContact,
+  getUserContact
 };

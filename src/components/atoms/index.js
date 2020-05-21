@@ -6,5 +6,16 @@ import Button from './Button';
 import Image from './Image';
 import Skeleton from './Skeleton';
 import Label from './Label';
+import FormText from './FormText';
 
-export { Skeleton, Container, Section, Input, FormGroup, Button, Image, Label };
+export {
+  Skeleton,
+  Container,
+  Section,
+  Input,
+  FormGroup,
+  Button,
+  Image,
+  Label,
+  FormText
+};

@@ -41,3 +41,9 @@ export const usersSearchSelector = reselect.createSelector(
     );
   }
 );
+
+/**
+ * a Selector for user contacts
+ * @param {*} state
+ */
+export const userContactSelector = state => state.user.contacts;

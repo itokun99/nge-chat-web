@@ -7,6 +7,8 @@ import Setting from './Setting';
 import NotFound404 from './NotFound404';
 import Account from './Account';
 import SearchPage from './SearchPage';
+import UserInfo from './UserInfo';
+import Contact from './Contact';
 
 export {
   Homepage,
@@ -17,5 +19,7 @@ export {
   Setting,
   NotFound404,
   Account,
-  SearchPage
+  SearchPage,
+  UserInfo,
+  Contact
 };

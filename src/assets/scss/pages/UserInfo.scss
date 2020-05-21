@@ -1,0 +1,12 @@
+.UserInfo {
+  padding: 0 $gutter-m;
+  padding-top: $app-header-height;
+
+  &__photo {
+    height: 200px;
+    width: 200px;
+    margin: 0 auto $gutter-m auto;
+    border-radius: 50%;
+    background-color: $dark-gray;
+  }
+}

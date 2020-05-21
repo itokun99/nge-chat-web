@@ -7,7 +7,9 @@ import {
   Setting,
   NotFound404,
   Account,
-  SearchPage
+  SearchPage,
+  UserInfo,
+  Contact
 } from 'pages';
 
 /**
@@ -15,11 +17,25 @@ import {
  */
 const appRoutes = [
   {
+    name: 'Contact',
+    component: Contact,
+    exact: true,
+    path: '/contact',
+    auth: true
+  },
+  {
+    name: 'User Info',
+    component: UserInfo,
+    exact: true,
+    path: '/user/:id',
+    auth: true
+  },
+  {
     name: 'Search',
     component: SearchPage,
     exact: true,
     path: '/search',
-    auth: false
+    auth: true
   },
   {
     name: 'About',

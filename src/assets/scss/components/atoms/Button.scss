@@ -31,6 +31,12 @@
     width: 100%;
   }
 
+  &--withIcon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   &--circle {
     padding: 0;
     border-radius: 100px;

@@ -17,6 +17,10 @@ const SearchPage = ({
 }) => {
   const history = useHistory();
 
+  const navigateToDetail = userId => {
+    history.push(`/user/${userId}`);
+  };
+
   const renderList = () => {
     if (userFilterText) {
       return (
@@ -24,6 +28,7 @@ const SearchPage = ({
           {usersWithFilter.map((user, index) => (
             <ChatItem
               key={index}
+              onClick={() => navigateToDetail(user.userId)}
               title={user.name}
               description={user.email}
               image={user.photo}
@@ -38,6 +43,7 @@ const SearchPage = ({
         {users.map((user, index) => (
           <ChatItem
             key={index}
+            onClick={() => navigateToDetail(user.userId)}
             title={user.name}
             description={user.email}
             image={user.photo}
