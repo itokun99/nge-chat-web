@@ -3,9 +3,7 @@ import {
   BrowserRouter as Router,
   Route,
   AnimatedSwitch,
-  spring,
-  connect,
-  PropTypes
+  spring
 } from 'libraries';
 import { AppContainer } from 'containers';
 import { LoadingScreen } from 'components';

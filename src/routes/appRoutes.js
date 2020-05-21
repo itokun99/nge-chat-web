@@ -10,6 +10,9 @@ import {
   SearchPage
 } from 'pages';
 
+/**
+ * a main router for application
+ */
 const appRoutes = [
   {
     name: 'Search',

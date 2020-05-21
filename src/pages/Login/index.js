@@ -2,7 +2,7 @@ import { React, Link, useHistory, useState } from 'libraries';
 import { BaseContainer, AuthContainer } from 'containers';
 import { Input, FormGroup, Button } from 'components';
 import { showPopup, login, loginGoogle } from 'services';
-import { validateEmail, handleAsync, createMessageFromAuthError } from 'utils';
+import { validateEmail, handleAsync, createMessageFirebase } from 'utils';
 
 const Login = () => {
   const history = useHistory();
@@ -38,7 +38,7 @@ const Login = () => {
     } catch (err) {
       let { message } = err;
       if (err.code) {
-        message = createMessageFromAuthError(err.code);
+        message = createMessageFirebase(err.code);
       }
       showPopup({
         title: 'Terjadi Kesalahan!',
