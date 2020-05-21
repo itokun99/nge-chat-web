@@ -45,9 +45,18 @@ const AccountForm = ({ profile }) => {
       });
     }
 
+    if (photoFile && photoFile.size > 200000) {
+      return showPopup({
+        title: 'Terjadi Kesalahan!',
+        description:
+          'Waduh, file fotonya kegedean, ini gak baik buat server kita! Ukuran file foto harus kurang dari 200 Kb. Coba kompres dulu deh!'
+      });
+    }
+
     const payload = {
       name,
-      bio
+      bio,
+      photo
     };
 
     const [res, err] = await handleAsync(updateProfile(payload));

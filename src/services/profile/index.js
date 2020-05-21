@@ -49,7 +49,12 @@ export const getProfile = () => {
  */
 export const updateProfile = async (payload = {}) => {
   try {
-    await firebaseService.updateUserData(payload);
+    const updateToDatabase = {
+      name: payload.name,
+      bio: payload.bio,
+      photo: payload.photo
+    };
+    await firebaseService.updateUserData(updateToDatabase);
     const userData = await firebaseService.getUserData();
     const userObj = createProfileObj({ ...userData });
     dispatch(setProfile(userObj));

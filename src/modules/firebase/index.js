@@ -159,6 +159,20 @@ const getUsers = async () => {
 };
 
 /**
+ * a firebase service for upload image to firebase storage
+ */
+export const uploadToStorage = async file => {
+  const storageRef = firebase.storage().ref();
+  try {
+    const snapshot = await storageRef.put(file);
+    console.log('snapshoot', snapshot);
+    return snapshot;
+  } catch (err) {
+    throw err;
+  }
+};
+
+/**
  * a firebase group all service
  */
 export const firebaseService = {
