@@ -1,0 +1,20 @@
+.FormText {
+  position: relative;
+
+  &__label {
+    font-size: $font-xxs;
+    display: inline-block;
+    margin-bottom: $gutter-xs;
+
+    &--bold {
+      font-weight: 600;
+    }
+  }
+
+
+  &__text {
+    &--bold {
+      font-weight: 600;
+    }
+  }
+}

@@ -24,7 +24,8 @@ import {
   MdHelp,
   MdPhotoCamera,
   MdChat,
-  MdSearch
+  MdSearch,
+  MdPersonAdd
 } from 'react-icons/md';
 
 export {
@@ -52,7 +53,8 @@ export {
   MdPhotoCamera,
   MdChat,
   MdSearch,
-  reselect
+  reselect,
+  MdPersonAdd
 };
 
 export * from 'react';

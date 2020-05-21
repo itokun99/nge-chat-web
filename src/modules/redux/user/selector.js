@@ -1,10 +1,17 @@
 import { reselect } from 'libraries';
+import { profileSelector } from '../profile/selector';
 
 /**
  * a Selector for users data
  * @param {*} state
  */
-export const usersSelector = state => state.user.all;
+export const usersSelector = state => {
+  const profileState = state.profile;
+
+  if (!profileState) return state.user.all;
+
+  return state.user.all.filter(user => user.userId !== profileState.userId);
+};
 
 /**
  * a Selector for filter text user
@@ -34,3 +41,9 @@ export const usersSearchSelector = reselect.createSelector(
     );
   }
 );
+
+/**
+ * a Selector for user contacts
+ * @param {*} state
+ */
+export const userContactSelector = state => state.user.contacts;

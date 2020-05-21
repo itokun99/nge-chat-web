@@ -1,9 +1,11 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { React, PropTypes } from 'libraries';
 import { Image } from 'components/atoms';
 import { getInitialName } from 'utils';
 
-const ChatItem = ({ title, description, image }) => (
-  <div className="ChatItem">
+const ChatItem = ({ title, description, image, onClick }) => (
+  <div className="ChatItem" onClick={onClick}>
     <Image backgroundImage source={image} className="ChatItem__photo">
       {!image && (
         <span className="ChatItem__image-title">{getInitialName(title)}</span>
@@ -19,13 +21,15 @@ const ChatItem = ({ title, description, image }) => (
 ChatItem.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
-  image: PropTypes.string
+  image: PropTypes.string,
+  onClick: PropTypes.func
 };
 
 ChatItem.defaultProps = {
   title: '',
   description: '',
-  image: ''
+  image: '',
+  onClick: () => {}
 };
 
 export default ChatItem;

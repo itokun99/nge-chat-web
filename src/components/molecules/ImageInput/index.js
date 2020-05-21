@@ -21,7 +21,12 @@ const ImageInput = ({ image, onChange }) => {
   };
 
   return (
-    <Image backgroundImage className="ImageInput" source={image}>
+    <Image
+      backgroundImage
+      className="ImageInput"
+      source={image}
+      resizeMode="cover"
+    >
       <span className="ImageInput__icon">
         <MdPhotoCamera size={72} />
       </span>

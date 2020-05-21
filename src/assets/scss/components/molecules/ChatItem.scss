@@ -2,6 +2,7 @@
   display: flex;
   border-bottom: .5px solid $gray;
   padding: $gutter-sm;
+  cursor: pointer;
 
   &__photo {
     width: 50px;
@@ -9,6 +10,7 @@
     background-color: $dark-gray;
     border-radius: 50%;
     margin-right: $gutter-sm;
+    background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,6 +18,7 @@
     font-weight: bold;
     font-size: $font-l;
     line-height: 18px;
+    cursor: pointer;
   }
 
   &__image-title {}
@@ -26,6 +29,7 @@
   }
 
   &__title {
+    cursor: pointer;
     font-weight: bold;
     display: inline-block;
     width: 100%;
@@ -33,6 +37,7 @@
   }
 
   &__description {
+    cursor: pointer;
     font-size: $font-xs;
     display: inline-block;
     width: 100%;

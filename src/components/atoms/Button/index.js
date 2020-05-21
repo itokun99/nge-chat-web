@@ -12,7 +12,8 @@ const Button = ({
   disabled,
   circle,
   circleSize,
-  className
+  className,
+  withIcon
 }) => {
   const buttonBlock = `Button`;
   const buttonClass = cx(
@@ -22,7 +23,8 @@ const Button = ({
       [`${buttonBlock}--block`]: block,
       [`${buttonBlock}--${size}`]: size,
       [`${buttonBlock}--disabled`]: disabled,
-      [`${buttonBlock}--circle`]: circle
+      [`${buttonBlock}--circle`]: circle,
+      [`${buttonBlock}--withIcon`]: withIcon
     },
     className
   );
@@ -63,7 +65,8 @@ Button.propTypes = {
   size: PropTypes.oneOf(['small', 'medium', 'large']),
   circle: PropTypes.bool,
   circleSize: PropTypes.number,
-  className: PropTypes.string
+  className: PropTypes.string,
+  withIcon: PropTypes.bool
 };
 
 Button.defaultProps = {
@@ -75,7 +78,8 @@ Button.defaultProps = {
   size: 'medium',
   circle: false,
   circleSize: 42,
-  className: ''
+  className: '',
+  withIcon: false
 };
 
 export default Button;
