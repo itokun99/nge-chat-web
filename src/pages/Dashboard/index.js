@@ -16,7 +16,6 @@ const Dashboard = () => {
         }}
       >
         <div className="Dashboard">
-          <ChatListSection />
           <Button
             onClick={() => history.push('/search')}
             circle

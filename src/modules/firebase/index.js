@@ -94,6 +94,10 @@ const loginWithGoogle = async () => {
   return response;
 };
 
+/**
+ * TODO: refactor
+ * @param {*} payload
+ */
 const updateUserProfile = async (payload = {}) => {
   const user = firebase.auth().currentUser;
 
@@ -134,6 +138,27 @@ const updateUserData = (payload = {}) => {
 };
 
 /**
+ * a firebase service for get all users data
+ */
+const getUsers = async () => {
+  try {
+    const usersSnapshot = await firebase
+      .database()
+      .ref('/users')
+      .once('value');
+    const usersData = usersSnapshot.val();
+    let users = [];
+
+    if (usersData) {
+      users = Object.keys(usersData).map(key => usersData[key]);
+    }
+    return users;
+  } catch (err) {
+    throw err;
+  }
+};
+
+/**
  * a firebase group all service
  */
 export const firebaseService = {
@@ -144,5 +169,6 @@ export const firebaseService = {
   getUserData,
   createUserData,
   updateUserData,
-  updateUserProfile
+  updateUserProfile,
+  getUsers
 };

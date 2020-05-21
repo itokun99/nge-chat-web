@@ -10,12 +10,14 @@ const AccountForm = ({ profile }) => {
   const [photoFile, changePhotoFile] = useState(null);
   const [name, changeName] = useState('');
   const [email, changeEmail] = useState('');
+  const [bio, changeBio] = useState('');
 
   const initData = React.useCallback(() => {
     if (profile) {
       changePhoto(profile.photo);
       changeName(profile.name);
       changeEmail(profile.email);
+      changeBio(profile.bio);
     }
   }, [profile]);
 
@@ -44,7 +46,8 @@ const AccountForm = ({ profile }) => {
     }
 
     const payload = {
-      name
+      name,
+      bio
     };
 
     const [res, err] = await handleAsync(updateProfile(payload));
@@ -80,6 +83,15 @@ const AccountForm = ({ profile }) => {
           type="text"
           value={name}
           placeholder="Nama"
+        />
+      </FormGroup>
+      <FormGroup>
+        <Label>Bio</Label>
+        <Input
+          onChange={e => changeBio(e.target.value)}
+          type="textarea"
+          value={bio}
+          placeholder="Bio"
         />
       </FormGroup>
       <FormGroup>

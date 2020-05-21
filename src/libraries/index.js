@@ -6,6 +6,7 @@ import axios from 'axios';
 import thunk from 'redux-thunk';
 import firebase from 'firebase';
 import cx from 'classnames';
+import * as reselect from 'reselect';
 
 import {
   MdArrowBack,
@@ -50,7 +51,8 @@ export {
   MdHelp,
   MdPhotoCamera,
   MdChat,
-  MdSearch
+  MdSearch,
+  reselect
 };
 
 export * from 'react';

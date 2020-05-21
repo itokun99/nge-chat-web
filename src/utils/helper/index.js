@@ -100,7 +100,8 @@ export const createProfileObj = data => ({
   name: data.name,
   email: data.email,
   userId: data.userId,
-  photo: data.photo
+  photo: data.photo,
+  bio: data.bio
 });
 
 /**
@@ -110,7 +111,7 @@ export const createProfileObj = data => ({
  */
 export const getInitialName = nameString => {
   if (!nameString) {
-    return '?';
+    return '';
   }
 
   const nameArr = nameString.toLowerCase().split(' ');
