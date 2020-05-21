@@ -31,6 +31,11 @@
     width: 100%;
   }
 
+  &--circle {
+    padding: 0;
+    border-radius: 100px;
+  }
+
   &--disabled {
     opacity: 0.8;
     cursor: not-allowed;

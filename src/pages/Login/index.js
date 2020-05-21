@@ -2,7 +2,7 @@ import { React, Link, useHistory, useState } from 'libraries';
 import { BaseContainer, AuthContainer } from 'containers';
 import { Input, FormGroup, Button } from 'components';
 import { showPopup, login, loginGoogle } from 'services';
-import { validateEmail, handleAsync, createMessageFromAuthError } from 'utils';
+import { validateEmail, handleAsync, createMessageFirebase } from 'utils';
 
 const Login = () => {
   const history = useHistory();
@@ -36,10 +36,9 @@ const Login = () => {
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis lorem bibendum, pulvinar est in, blandit sem. Pellentesque vitae mi eu quam tempor luctus in a purus. Duis quis sollicitudin tortor.'
       });
     } catch (err) {
-      console.log('err', err);
       let { message } = err;
       if (err.code) {
-        message = createMessageFromAuthError(err.code);
+        message = createMessageFirebase(err.code);
       }
       showPopup({
         title: 'Terjadi Kesalahan!',

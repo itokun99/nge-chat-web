@@ -16,6 +16,10 @@ const constants = {
       messagingSenderId: '923715867214',
       appId: '1:923715867214:web:275acb40e99d65c606a91f',
       measurementId: 'G-1ZS2Y1G6MF'
+    },
+    fcm: {
+      key:
+        'BEuNvZtdjVK0xKbZIOWnG_1wz4ReEDfwL6Ng3dMcMZLj4mGMMFsdkxaYazp_Xd1G3wtE4EwtzaCXGRA06I7AlAI'
     }
   },
 

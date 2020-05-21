@@ -6,6 +6,7 @@ import { ImageInput } from 'components/molecules';
 
 const AccountForm = ({ profile }) => {
   const [photo, changePhoto] = useState(null);
+  const [photoFile, changePhotoFile] = useState(null);
   const [name, changeName] = useState('');
   const [email, changeEmail] = useState('');
 
@@ -26,6 +27,11 @@ const AccountForm = ({ profile }) => {
     });
   };
 
+  const handleChangePhoto = (file, imageBase64) => {
+    changePhotoFile(file);
+    changePhoto(imageBase64);
+  };
+
   React.useEffect(() => {
     initData();
   }, [initData]);
@@ -33,7 +39,7 @@ const AccountForm = ({ profile }) => {
   return (
     <div className="AccountForm">
       <FormGroup>
-        <ImageInput image={photo} />
+        <ImageInput image={photo} onChange={handleChangePhoto} />
       </FormGroup>
       <FormGroup>
         <Label>Nama</Label>

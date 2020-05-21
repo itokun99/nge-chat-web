@@ -4,6 +4,11 @@ import { createProfileObj } from 'utils';
 
 const { dispatch } = store;
 
+/**
+ * a Service for get current user from firebase auth with auth state change
+ * this service will be to use in App.js and always call every user change
+ * like login, register, and logout
+ */
 export const getProfile = () => {
   const promise = new Promise((resolve, reject) => {
     firebase.auth().onAuthStateChanged(
@@ -30,7 +35,7 @@ export const getProfile = () => {
       },
       error => {
         dispatch(clearProfile());
-        reject(new Error('Error on auth with firebase'));
+        reject(error);
       }
     );
   });

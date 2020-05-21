@@ -6,10 +6,21 @@ import {
   Dashboard,
   Setting,
   NotFound404,
-  Account
+  Account,
+  SearchPage
 } from 'pages';
 
+/**
+ * a main router for application
+ */
 const appRoutes = [
+  {
+    name: 'Search',
+    component: SearchPage,
+    exact: true,
+    path: '/search',
+    auth: false
+  },
   {
     name: 'About',
     component: About,

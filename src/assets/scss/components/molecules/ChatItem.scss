@@ -1,0 +1,35 @@
+.ChatItem {
+  display: flex;
+  border-bottom: .5px solid $gray;
+  padding: $gutter-sm;
+
+  &__photo {
+    width: 50px;
+    height: 50px;
+    background-color: $dark-gray;
+    border-radius: 50%;
+    margin-right: $gutter-sm;
+  }
+
+  &__textWrapper {
+    flex: 1;
+    width: 100%;
+  }
+
+  &__title {
+    font-weight: bold;
+    display: inline-block;
+    width: 100%;
+    margin-bottom: $gutter-xs;
+  }
+
+  &__description {
+    font-size: $font-xs;
+    display: inline-block;
+    width: 100%;
+    max-width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

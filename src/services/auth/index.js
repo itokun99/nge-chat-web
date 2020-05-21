@@ -39,6 +39,7 @@ export const login = async (payload = {}) => {
   }
   const { user } = res;
   const userData = await firebaseService.getUserData(user.uid);
+
   const userObj = createProfileObj({ ...user, ...userData });
 
   dispatch(setProfile(userObj));

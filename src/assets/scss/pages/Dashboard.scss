@@ -1,3 +1,9 @@
 .Dashboard {
   padding-top: 60px;
+
+  &__newChat {
+    position: absolute;
+    bottom: $gutter-m;
+    right: $gutter-m;
+  }
 }
