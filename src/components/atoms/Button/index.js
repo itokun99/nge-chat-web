@@ -12,8 +12,7 @@ const Button = ({
   disabled,
   circle,
   circleSize,
-  className,
-  ...props
+  className
 }) => {
   const buttonBlock = `Button`;
   const buttonClass = cx(

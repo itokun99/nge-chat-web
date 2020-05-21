@@ -4,11 +4,12 @@ import { handleAsync } from 'utils';
 
 // initializeApp
 firebase.initializeApp(appConfig.firebase);
-// const messaging = firebase.messaging();
-// messaging.usePublicVapidKey(appConfig.fcm.key);
 
-// console.log('messaging', messaging);
-
+/**
+ * a firebase service for create user data,
+ * user data store to firebase db for user information
+ * @param {*} payload a payload require ['name', 'email', 'userId', 'photo']
+ */
 const createUserData = async (payload = {}) => {
   try {
     await firebase
@@ -27,6 +28,10 @@ const createUserData = async (payload = {}) => {
   }
 };
 
+/**
+ * a firebase service for get user data information
+ * from firebase database, user id get from current auth user
+ */
 const getUserData = () => {
   const userId = firebase.auth().currentUser.uid;
   const promise = new Promise(resolve => {
@@ -40,21 +45,10 @@ const getUserData = () => {
   return promise;
 };
 
-const authUser = () => {
-  const promise = new Promise((resolve, reject) =>
-    firebase.auth().onAuthStateChanged(
-      user => {
-        resolve(user);
-      },
-      error => {
-        reject(error);
-      }
-    )
-  );
-
-  return promise;
-};
-
+/**
+ * a firebase service for creating auth user with email and password
+ * @param {*} payload a payload require ['email', 'password']
+ */
 const register = async (payload = {}) => {
   const [res, err] = await handleAsync(
     firebase
@@ -65,6 +59,10 @@ const register = async (payload = {}) => {
   return res;
 };
 
+/**
+ * a firebase service for login user with email and password
+ * @param {*} payload a payload require ['email', 'password']
+ */
 const login = async (payload = {}) => {
   try {
     const response = await firebase
@@ -76,12 +74,18 @@ const login = async (payload = {}) => {
   }
 };
 
+/**
+ * a firebase service for logout from auth firebase
+ */
 const logout = async () => {
   const [res, err] = await handleAsync(firebase.auth().signOut());
   if (err) throw err;
   return res;
 };
 
+/**
+ * a firebase service for login with google auth provider
+ */
 const loginWithGoogle = async () => {
   const provider = new firebase.auth.GoogleAuthProvider();
 
@@ -90,12 +94,14 @@ const loginWithGoogle = async () => {
   return response;
 };
 
+/**
+ * a firebase group all service
+ */
 export const firebaseService = {
   register,
   login,
   logout,
   loginWithGoogle,
   getUserData,
-  createUserData,
-  authUser
+  createUserData
 };
