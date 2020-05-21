@@ -30,7 +30,7 @@ export const getProfile = () => {
       },
       error => {
         dispatch(clearProfile());
-        reject(new Error('Error on auth with firebase'));
+        reject(error);
       }
     );
   });

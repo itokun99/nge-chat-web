@@ -36,7 +36,6 @@ const Login = () => {
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis lorem bibendum, pulvinar est in, blandit sem. Pellentesque vitae mi eu quam tempor luctus in a purus. Duis quis sollicitudin tortor.'
       });
     } catch (err) {
-      console.log('err', err);
       let { message } = err;
       if (err.code) {
         message = createMessageFromAuthError(err.code);

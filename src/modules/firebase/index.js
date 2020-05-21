@@ -4,6 +4,10 @@ import { handleAsync } from 'utils';
 
 // initializeApp
 firebase.initializeApp(appConfig.firebase);
+// const messaging = firebase.messaging();
+// messaging.usePublicVapidKey(appConfig.fcm.key);
+
+// console.log('messaging', messaging);
 
 const createUserData = async (payload = {}) => {
   try {

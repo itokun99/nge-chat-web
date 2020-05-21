@@ -1,30 +1,34 @@
-import { React, MdMenu } from 'libraries';
+import { React, MdChat, useHistory } from 'libraries';
 import { BaseContainer, PrivateContainer } from 'containers';
-import { Button } from 'components';
-import { logout } from 'services';
+import { Button, ChatListSection } from 'components';
 
-const Dashboard = () => (
-  <PrivateContainer>
-    <BaseContainer
-      sidebar
-      disableRightAction
-      headerProps={{
-        theme: 'light',
-        transparent: true
-      }}
-    >
-      <div className="Dashboard">
-        <div className="Dashboard__header">
-          <h1 className="Dashboard__title">Selamat Datang!</h1>
-          <div className="Dashboard__description">
-            Ayo mulai nge-chat bareng orang-orang di sekitar mu
-          </div>
+const Dashboard = () => {
+  const history = useHistory();
+  return (
+    <PrivateContainer>
+      <BaseContainer
+        sidebar
+        disableRightAction
+        headerProps={{
+          title: 'Dashboard',
+          theme: 'light',
+          transparent: true
+        }}
+      >
+        <div className="Dashboard">
+          <ChatListSection />
+          <Button
+            onClick={() => history.push('/search')}
+            circle
+            circleSize={64}
+            className="Dashboard__newChat"
+          >
+            <MdChat size={32} />
+          </Button>
         </div>
-
-        <div className="Dashboard__body"></div>
-      </div>
-    </BaseContainer>
-  </PrivateContainer>
-);
+      </BaseContainer>
+    </PrivateContainer>
+  );
+};
 
 export default Dashboard;

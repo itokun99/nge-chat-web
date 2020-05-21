@@ -12,6 +12,7 @@ const AppHeader = ({
   theme,
   leftComponent,
   rightComponent,
+  centerComponent,
   disableShadow
 }) => {
   const appHeaderClass = cx('AppHeader', {
@@ -34,7 +35,11 @@ const AppHeader = ({
         </div>
       )}
       <div className="AppHeader__center">
-        <span className="AppHeader__title">{title}</span>
+        {centerComponent ? (
+          <React.Fragment>{centerComponent}</React.Fragment>
+        ) : (
+          <span className="AppHeader__title">{title}</span>
+        )}
       </div>
       {!disableRightAction && (
         <div className="AppHeader__right">
@@ -60,6 +65,7 @@ AppHeader.propTypes = {
   transparent: PropTypes.bool,
   leftComponent: PropTypes.any,
   rightComponent: PropTypes.any,
+  centerComponent: PropTypes.any,
   theme: PropTypes.oneOf(['dark', 'light']),
   disableShadow: PropTypes.bool
 };
@@ -72,6 +78,7 @@ AppHeader.defaultProps = {
   disableRightAction: false,
   leftComponent: null,
   rightComponent: null,
+  centerComponent: null,
   onPressLeft: () => {},
   onPressRight: () => {},
   disableShadow: false

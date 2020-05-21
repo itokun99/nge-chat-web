@@ -4,12 +4,16 @@ import LoadingScreen from './LoadingScreen';
 import ProfileSidebar from './ProfileSidebar';
 import MenuSidebar from './MenuSidebar';
 import ImageInput from './ImageInput';
+import ChatItem from './ChatItem';
+import SearchInput from './SearchInput';
 
 export {
   AppHeader,
   Popup,
+  ChatItem,
   LoadingScreen,
   ProfileSidebar,
   MenuSidebar,
-  ImageInput
+  ImageInput,
+  SearchInput
 };

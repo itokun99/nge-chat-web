@@ -10,24 +10,34 @@ const Button = ({
   size,
   onClick,
   disabled,
+  circle,
+  circleSize,
+  className,
   ...props
 }) => {
   const buttonBlock = `Button`;
-  const buttonClass = cx(buttonBlock, {
-    [`${buttonBlock}--${color}`]: color,
-    [`${buttonBlock}--block`]: block,
-    [`${buttonBlock}--${size}`]: size,
-    [`${buttonBlock}--disabled`]: disabled
-  });
+  const buttonClass = cx(
+    buttonBlock,
+    {
+      [`${buttonBlock}--${color}`]: color,
+      [`${buttonBlock}--block`]: block,
+      [`${buttonBlock}--${size}`]: size,
+      [`${buttonBlock}--disabled`]: disabled,
+      [`${buttonBlock}--circle`]: circle
+    },
+    className
+  );
 
   return (
     <React.Fragment>
       <button
         type={type}
         className={buttonClass}
-        style={style}
         onClick={disabled ? () => {} : e => onClick(e)}
-        {...props}
+        style={{
+          ...(circle && { width: circleSize, height: circleSize }),
+          ...style
+        }}
       >
         {children}
       </button>
@@ -51,7 +61,10 @@ Button.propTypes = {
     'danger',
     'gray'
   ]),
-  size: PropTypes.oneOf(['small', 'medium', 'large'])
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  circle: PropTypes.bool,
+  circleSize: PropTypes.number,
+  className: PropTypes.string
 };
 
 Button.defaultProps = {
@@ -60,7 +73,10 @@ Button.defaultProps = {
   block: false,
   type: 'button',
   color: 'primary',
-  size: 'medium'
+  size: 'medium',
+  circle: false,
+  circleSize: 42,
+  className: ''
 };
 
 export default Button;

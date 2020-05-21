@@ -36,11 +36,6 @@
     box-shadow: none;
   }
 
-  &--transparent {
-    background-color: transparent;
-    box-shadow: none;
-  }
-
   &--light {
     background-color: $light;
     color: $dark
@@ -48,5 +43,10 @@
 
   &--dark {
     color: $light
+  }
+
+  &--transparent {
+    background-color: transparent;
+    box-shadow: none;
   }
 }

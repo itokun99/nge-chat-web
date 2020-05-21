@@ -10,8 +10,7 @@ import {
 import { AppContainer } from 'containers';
 import { LoadingScreen } from 'components';
 import { appRoutes } from 'routes';
-import { profileSelector } from 'modules';
-import { getProfile } from 'services';
+import { getProfile, showPopup } from 'services';
 
 function glide(val) {
   return spring(val, {
@@ -35,12 +34,20 @@ const pageTransitions = {
   }
 };
 
-const App = ({ profile }) => {
+const App = () => {
   const [appLoading, setAppLoading] = React.useState(true);
 
   React.useEffect(() => {
     const init = async () => {
-      await getProfile();
+      try {
+        await getProfile();
+      } catch (err) {
+        showPopup({
+          title: 'Terjadi Kesalahan!',
+          description: err.message
+        });
+      }
+
       setAppLoading(false);
     };
     init();
@@ -79,16 +86,4 @@ const App = ({ profile }) => {
   );
 };
 
-const reduxState = state => ({
-  profile: profileSelector(state)
-});
-
-App.propTypes = {
-  profile: PropTypes.object
-};
-
-App.defaultProps = {
-  profile: null
-};
-
-export default connect(reduxState)(App);
+export default App;

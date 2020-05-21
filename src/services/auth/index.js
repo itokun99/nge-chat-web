@@ -39,6 +39,8 @@ export const login = async (payload = {}) => {
   }
   const { user } = res;
   const userData = await firebaseService.getUserData(user.uid);
+
+  console.log(user);
   const userObj = createProfileObj({ ...user, ...userData });
 
   dispatch(setProfile(userObj));
@@ -54,6 +56,7 @@ export const loginGoogle = async () => {
 
   if (err) throw err;
 
+  console.log(res);
   return res;
 };
 
