@@ -1,5 +1,12 @@
 import { handleAsync, createProfileObj } from 'utils';
-import { store, firebaseService, clearProfile, setProfile } from 'modules';
+import {
+  store,
+  firebaseService,
+  clearProfile,
+  setProfile,
+  clearUsers,
+  clearUserContact
+} from 'modules';
 
 const { dispatch } = store;
 
@@ -65,5 +72,7 @@ export const logout = async () => {
   const [res, err] = await handleAsync(firebaseService.logout());
   if (err) throw err;
   dispatch(clearProfile());
+  dispatch(clearUsers());
+  dispatch(clearUserContact());
   return res;
 };
