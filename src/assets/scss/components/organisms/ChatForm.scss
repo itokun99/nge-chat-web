@@ -1,0 +1,31 @@
+.ChatForm {
+  position: relative;
+  height: 100%;
+  background-color: $gray;
+  display: flex;
+  flex-direction: column;
+
+  &__top {
+    flex: 1;
+  }
+
+  &__bottom {
+    background-color: $light;
+    padding: $gutter-sm $gutter-m $gutter-sm $gutter-m
+  }
+
+
+  &__inputWrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  &__inputText {
+    flex: 1;
+    resize: none;
+  }
+
+  &__buttonSend {
+    margin-left: $gutter-xs;
+  }
+}

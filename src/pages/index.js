@@ -9,6 +9,7 @@ import Account from './Account';
 import SearchPage from './SearchPage';
 import UserInfo from './UserInfo';
 import Contact from './Contact';
+import Chat from './Chat';
 
 export {
   Homepage,
@@ -21,5 +22,6 @@ export {
   Account,
   SearchPage,
   UserInfo,
-  Contact
+  Contact,
+  Chat
 };
