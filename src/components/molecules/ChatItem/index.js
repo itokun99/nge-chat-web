@@ -6,7 +6,12 @@ import { getInitialName } from 'utils';
 
 const ChatItem = ({ title, description, image, onClick }) => (
   <div className="ChatItem" onClick={onClick}>
-    <Image backgroundImage source={image} className="ChatItem__photo">
+    <Image
+      backgroundImage
+      source={image}
+      className="ChatItem__photo"
+      resizeMode="cover"
+    >
       {!image && (
         <span className="ChatItem__image-title">{getInitialName(title)}</span>
       )}

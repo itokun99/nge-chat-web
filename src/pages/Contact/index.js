@@ -9,7 +9,14 @@ import {
 } from 'libraries';
 import { userContactSelector } from 'modules';
 import { BaseContainer, PrivateContainer } from 'containers';
-import { Button, Image, FormGroup, FormText, ChatItem } from 'components';
+import {
+  Button,
+  Image,
+  FormGroup,
+  FormText,
+  ChatItem,
+  Container
+} from 'components';
 import { getUser, getContacts } from 'services';
 
 const Contact = ({ users }) => {
@@ -48,7 +55,7 @@ const Contact = ({ users }) => {
           onPressLeft: () => history.goBack()
         }}
       >
-        <div className="UserInfo">{renderList()}</div>
+        <Container noPadding>{renderList()}</Container>
       </BaseContainer>
     </PrivateContainer>
   );

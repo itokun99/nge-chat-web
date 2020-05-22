@@ -63,6 +63,7 @@ const UserInfo = () => {
               className="UserInfo__photo"
               source={photo}
               backgroundImage
+              resizeMode="cover"
             ></Image>
             <FormGroup>
               <FormText label="Nama" text={name} />

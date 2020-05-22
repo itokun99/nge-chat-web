@@ -7,6 +7,8 @@
     width: 200px;
     margin: 0 auto $gutter-m auto;
     border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
     background-color: $dark-gray;
   }
 }
