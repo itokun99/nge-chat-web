@@ -75,7 +75,11 @@ const UserInfo = () => {
               <FormText label="Bio" text={bio} />
             </FormGroup>
             <FormGroup>
-              <Button withIcon block>
+              <Button
+                withIcon
+                block
+                onClick={() => history.push(`/chat/${id}`)}
+              >
                 <MdChat size={24} style={{ marginRight: 8 }} />
                 Mulai Nge-Chat!
               </Button>

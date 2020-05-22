@@ -1,0 +1,24 @@
+.ChatHeader {
+  display: flex;
+  align-items: center;
+
+  &__image {
+    height: 32px;
+    width: 32px;
+    background-color: $dark-gray;
+    border-radius: 50%;
+    margin-right: $gutter-sm;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  &__title {
+    font-weight: 600;
+    display: block;
+  }
+
+  &__subtitle {
+    display: block;
+    font-size: $font-xs;
+  }
+}

@@ -9,13 +9,21 @@ import {
   Account,
   SearchPage,
   UserInfo,
-  Contact
+  Contact,
+  Chat
 } from 'pages';
 
 /**
  * a main router for application
  */
 const appRoutes = [
+  {
+    name: 'Chat',
+    component: Chat,
+    exact: true,
+    path: '/chat/:userId',
+    auth: true
+  },
   {
     name: 'Contact',
     component: Contact,

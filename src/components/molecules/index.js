@@ -5,6 +5,7 @@ import ProfileSidebar from './ProfileSidebar';
 import MenuSidebar from './MenuSidebar';
 import ImageInput from './ImageInput';
 import ChatItem from './ChatItem';
+import ChatHeader from './ChatHeader';
 import SearchInput from './SearchInput';
 
 export {
@@ -15,5 +16,6 @@ export {
   ProfileSidebar,
   MenuSidebar,
   ImageInput,
-  SearchInput
+  SearchInput,
+  ChatHeader
 };

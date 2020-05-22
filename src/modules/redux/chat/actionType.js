@@ -1,0 +1,6 @@
+const actionType = {
+  SET_SELECTED_USER_CHAT: 'SET_SELECTED_USER_CHAT',
+  CLEAR_SELECTED_USER_CHAT: 'CLEAR_SELECTED_USER_CHAT'
+};
+
+export default actionType;
