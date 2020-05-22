@@ -23,6 +23,7 @@ const ProfileSidebar = ({ profile }) => {
         backgroundImage
         source={profile.photo}
         className="ProfileSidebar__photo"
+        resizeMode="cover"
       />
     );
   };

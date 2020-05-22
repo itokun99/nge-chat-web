@@ -1,7 +1,7 @@
 @keyframes skeletonShimmer {
   @for $i from 0 through 100 {
     #{$i * 1%} {
-      background: linear-gradient(90deg, $light-gray 0%, $gray #{$i * 1%}, $light-gray 100%);
+      background: linear-gradient(90deg, $gray 0%, $light-gray #{$i * 1%}, $gray 100%);
     }
   }
 }

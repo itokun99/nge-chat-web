@@ -1,9 +1,11 @@
 .Container {
   position: relative;
-  overflow-x: hidden;
-  overflow-y: auto;
-  max-width: $small-phone;
-  margin: 0 auto 0 auto;
-  background-color: $light;
-  min-height: 100vh;
+  padding-top: $app-header-height;
+  padding-left: $gutter-m;
+  padding-right: $gutter-m;
+
+  &--no-padding {
+    padding-right: 0;
+    padding-left: 0;
+  }
 }
