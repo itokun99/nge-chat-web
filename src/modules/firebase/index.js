@@ -174,9 +174,9 @@ const addUserContact = (payload = {}) => {
 
   return firebase
     .database()
-    .ref(`/userContact`)
+    .ref(`/userContact/${userId}`)
     .set({
-      [`${userId}`]: payload.data
+      data: payload.data
     });
 };
 
@@ -186,11 +186,14 @@ const getUserContact = async () => {
   try {
     const snapshot = await firebase
       .database()
-      .ref(`/userContact`)
-      .child(`${userId}`)
+      .ref(`/userContact/${userId}`)
       .once('value');
 
-    const data = snapshot.val();
+    const snapshotData = snapshot.val();
+
+    if (!snapshotData) return snapshotData;
+
+    const { data } = snapshotData;
     return data;
   } catch (err) {
     throw err;
