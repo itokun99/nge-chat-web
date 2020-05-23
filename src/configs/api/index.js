@@ -1,5 +1,5 @@
-import baseUrl from "./url";
-import ApiRequest from "./config";
+import baseUrl from './url';
+import ApiRequest from './config';
 
 const API = {};
 

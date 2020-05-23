@@ -25,10 +25,6 @@ const Contact = ({ users }) => {
   const [loading, setLoading] = React.useState(true);
   const history = useHistory();
 
-  const navigateToDetail = userId => {
-    history.push(`/user/${userId}`);
-  };
-
   const initData = React.useCallback(async () => {
     try {
       setLoading(true);
@@ -77,7 +73,7 @@ const Contact = ({ users }) => {
         {users.map((user, index) => (
           <ChatItem
             key={index}
-            onClick={() => navigateToDetail(user.userId)}
+            onClick={() => history.push(`/chat/${user.userId}`)}
             title={user.name}
             description={user.email}
             image={user.photo}

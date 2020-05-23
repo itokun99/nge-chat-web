@@ -7,7 +7,13 @@ import {
   connect,
   PropTypes
 } from 'libraries';
-import { userContactSelector } from 'modules';
+import {
+  chatContentSelector,
+  userContactSelector,
+  setSelectedUserChat,
+  clearSelectedUserChat,
+  clearChatContent
+} from 'modules';
 import { BaseContainer, PrivateContainer } from 'containers';
 import {
   Button,
@@ -20,10 +26,10 @@ import {
   ChatHeader,
   ChatForm
 } from 'components';
-import { getUser, getContacts, showPopup } from 'services';
+import { getUser, getContacts, showPopup, getUserChatContent } from 'services';
 import { createMessageFirebase } from 'utils';
 
-const Chat = () => {
+const Chat = ({ chatContent, setUserChat, clearState }) => {
   const [loading, setLoading] = React.useState(true);
   const [name, changeName] = React.useState('');
   const [photo, changePhoto] = React.useState('');
@@ -36,14 +42,20 @@ const Chat = () => {
         if (user) {
           changeName(user.name);
           changePhoto(user.photo);
+          setUserChat(user);
+          getUserChatContent(user.userId);
         }
       })
       .catch(err => console.log(err));
-  }, [userId]);
+  }, [setUserChat, userId]);
 
   React.useEffect(() => {
     initData();
-  }, [initData]);
+
+    return () => {
+      clearState();
+    };
+  }, [clearState, initData]);
 
   return (
     <PrivateContainer>
@@ -70,4 +82,28 @@ const Chat = () => {
     </PrivateContainer>
   );
 };
-export default Chat;
+
+Chat.propTypes = {
+  chatContent: PropTypes.array,
+  setUserChat: PropTypes.func,
+  clearState: PropTypes.func
+};
+
+Chat.defaultProps = {
+  chatContent: [],
+  setUserChat: () => {},
+  clearState: () => {}
+};
+
+const reduxState = state => ({
+  chatContent: chatContentSelector(state)
+});
+
+const reduxDispatch = dispatch => ({
+  setUserChat: p => dispatch(setSelectedUserChat(p)),
+  clearState: () => {
+    dispatch(clearSelectedUserChat());
+  }
+});
+
+export default connect(reduxState, reduxDispatch)(Chat);

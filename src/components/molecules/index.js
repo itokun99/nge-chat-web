@@ -7,6 +7,7 @@ import ImageInput from './ImageInput';
 import ChatItem from './ChatItem';
 import ChatHeader from './ChatHeader';
 import SearchInput from './SearchInput';
+import ChatBubble from './ChatBubble';
 
 export {
   AppHeader,
@@ -17,5 +18,6 @@ export {
   MenuSidebar,
   ImageInput,
   SearchInput,
-  ChatHeader
+  ChatHeader,
+  ChatBubble
 };

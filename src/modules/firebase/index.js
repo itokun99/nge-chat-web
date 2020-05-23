@@ -1,9 +1,11 @@
-import { firebase } from 'libraries';
+import { firebase, moment } from 'libraries';
 import { appConfig } from 'configs';
 import { handleAsync } from 'utils';
 
 // initializeApp
 firebase.initializeApp(appConfig.firebase);
+
+const getAuthUser = () => firebase.auth().currentUser;
 
 /**
  * a firebase service for create user data,
@@ -201,9 +203,89 @@ const getUserContact = async () => {
 };
 
 /**
+ * a firebase service for add new chat data to database
+ * @param {*} payload require { message, createdAt }
+ * @param {*} receiverUserId require from selected user data
+ */
+const addNewChat = async (payload = {}, receiverUserId) => {
+  try {
+    // current user as sender
+    const { currentUser } = firebase.auth();
+
+    // push chat key for new chat creation
+    const newChatKey = await firebase
+      .database()
+      .ref('/chats')
+      .push().key;
+
+    // set chat payload to chat with chat key
+    await firebase
+      .database()
+      .ref(`/chats/${newChatKey}/${moment().unix()}`)
+      .update({ ...payload, sender: currentUser.uid });
+
+    // save chat record to sender and receiver
+    await firebase
+      .database()
+      .ref(`/userChat/${currentUser.uid}/${receiverUserId}`)
+      .set({
+        chatKey: newChatKey
+      });
+
+    await firebase
+      .database()
+      .ref(`/userChat/${receiverUserId}/${currentUser.uid}`)
+      .set({
+        chatKey: newChatKey
+      });
+
+    return true;
+  } catch (err) {
+    throw err;
+  }
+};
+
+/**
+ * a firebase service for add new chat to existing chat object in database
+ * @param {*} payload require { message, createdAt }
+ * @param {*} chatKey from existing chatdata
+ */
+const updateChat = (payload = {}, chatKey) => {
+  const { currentUser } = firebase.auth();
+  const chatRef = firebase
+    .database()
+    .ref(`/chats/${chatKey}/${moment().unix()}`);
+  return chatRef.set({ ...payload, sender: currentUser.uid });
+};
+
+const getUserChatData = async receiverUserId => {
+  try {
+    const { currentUser } = firebase.auth();
+    const snapshot = await firebase
+      .database()
+      .ref(`/userChat/${currentUser.uid}/${receiverUserId}`)
+      .once('value');
+    return snapshot.val();
+  } catch (err) {
+    throw err;
+  }
+};
+
+const getChatContent = async chatKey => {
+  try {
+    const chatRef = firebase.database().ref(`/chats/${chatKey}`);
+    const snapshot = await chatRef.once('value');
+    return snapshot.val();
+  } catch (err) {
+    throw err;
+  }
+};
+
+/**
  * a firebase group all service
  */
 export const firebaseService = {
+  getAuthUser,
   register,
   login,
   logout,
@@ -215,5 +297,9 @@ export const firebaseService = {
   getUserWithUserId,
   uploadToStorage,
   addUserContact,
-  getUserContact
+  getUserContact,
+  addNewChat,
+  updateChat,
+  getUserChatData,
+  getChatContent
 };

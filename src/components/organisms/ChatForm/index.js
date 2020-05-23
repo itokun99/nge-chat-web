@@ -1,22 +1,82 @@
-import { React, PropTypes, MdSend } from 'libraries';
+import { React, PropTypes, MdSend, connect, useState, moment } from 'libraries';
 import { Input, Button } from 'components/atoms';
+import { ChatBubble } from 'components/molecules';
+import {
+  selectedUserChatSelector,
+  profileSelector,
+  chatContentSelector
+} from 'modules';
+import { sendChat } from 'services';
 
-const ChatForm = () => (
-  <div className="ChatForm">
-    <div className="ChatForm__top"></div>
-    <div className="ChatForm__bottom">
-      <div className="ChatForm__inputWrapper">
-        <Input
-          placeholder="Ketik disini..."
-          type="textarea"
-          className="ChatForm__inputText"
+const ChatForm = ({ profile, receiver, chatContent }) => {
+  const [message, changeMessage] = useState('');
+
+  const sendMessage = () => {
+    if (!message) return null;
+    const payload = {
+      message,
+      createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
+    };
+
+    sendChat(payload, receiver.userId);
+    changeMessage('');
+  };
+
+  const renderList = () => (
+    <React.Fragment>
+      {chatContent.map((chat, index) => (
+        <ChatBubble
+          key={index}
+          content={chat.message}
+          align={profile.userId === chat.sender ? 'right' : 'left'}
         />
-        <Button withIcon circle className="ChatForm__buttonSend">
-          <MdSend size={24} />
-        </Button>
+      ))}
+    </React.Fragment>
+  );
+
+  return (
+    <div className="ChatForm">
+      <div className="ChatForm__top">{renderList()}</div>
+      <div className="ChatForm__bottom">
+        <form className="ChatForm__inputWrapper">
+          <Input
+            value={message}
+            onChange={e => changeMessage(e.target.value)}
+            placeholder="Ketik disini..."
+            type="textarea"
+            className="ChatForm__inputText"
+            rows={2}
+          />
+          <Button
+            onClick={sendMessage}
+            withIcon
+            circle
+            className="ChatForm__buttonSend"
+          >
+            <MdSend size={24} />
+          </Button>
+        </form>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
-export default ChatForm;
+ChatForm.propTypes = {
+  chatContent: PropTypes.array,
+  profile: PropTypes.object,
+  receiver: PropTypes.object
+};
+
+ChatForm.defaultProps = {
+  chatContent: [],
+  profile: null,
+  receiver: null
+};
+
+const reduxState = state => ({
+  chatContent: chatContentSelector(state),
+  profile: profileSelector(state),
+  receiver: selectedUserChatSelector(state)
+});
+
+export default connect(reduxState)(ChatForm);

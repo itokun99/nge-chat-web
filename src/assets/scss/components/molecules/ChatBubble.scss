@@ -1,0 +1,16 @@
+.ChatBubble {
+  display: flex;
+  $block: ChatBubble;
+  padding: $gutter-xs $gutter-sm;
+
+  &__content {
+    border-radius: 8px;
+    padding: $gutter-sm;
+    display: inline-block;
+    background-color: $light;
+  }
+
+  &--right {
+    justify-content: flex-end;
+  }
+}
