@@ -88,6 +88,7 @@ export const getChatList = () =>
               resolve(result);
             });
           }
+          resolve(true);
         },
         error => {
           reject(error);
