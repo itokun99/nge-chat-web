@@ -5,9 +5,21 @@
 
   &__content {
     border-radius: 8px;
-    padding: $gutter-sm;
     display: inline-block;
     background-color: $light;
+    max-width: calc(80%);
+  }
+
+  &__message {
+    padding: $gutter-sm;
+    padding-bottom: 0;
+  }
+
+  &__meta {
+    opacity: 0.6;
+    text-align: right;
+    font-size: $font-xxs;
+    padding: $gutter-xxs;
   }
 
   &--right {

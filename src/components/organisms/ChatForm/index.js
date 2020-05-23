@@ -11,6 +11,8 @@ import { sendChat } from 'services';
 const ChatForm = ({ profile, receiver, chatContent }) => {
   const [message, changeMessage] = useState('');
 
+  const chatScroller = React.useRef(null);
+
   const sendMessage = () => {
     if (!message) return null;
     const payload = {
@@ -26,6 +28,7 @@ const ChatForm = ({ profile, receiver, chatContent }) => {
     <React.Fragment>
       {chatContent.map((chat, index) => (
         <ChatBubble
+          date={chat.createdAt ? moment(chat.createdAt).format('HH:mm') : null}
           key={index}
           content={chat.message}
           align={profile.userId === chat.sender ? 'right' : 'left'}
@@ -34,9 +37,13 @@ const ChatForm = ({ profile, receiver, chatContent }) => {
     </React.Fragment>
   );
 
+  console.log(chatScroller);
+
   return (
     <div className="ChatForm">
-      <div className="ChatForm__top">{renderList()}</div>
+      <div ref={chatScroller} className="ChatForm__top">
+        {renderList()}
+      </div>
       <div className="ChatForm__bottom">
         <form className="ChatForm__inputWrapper">
           <Input
